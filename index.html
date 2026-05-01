@@ -4,1411 +4,631 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>CLF44</title>
+    <title>CLF44 VIP SHOP</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-      :root {
-            /* Palette de couleurs */
-            --background-color: #1c1c1d;
-            --secondary-bg-color: #2c2c2e;
-            --tertiary-bg-color: #3a3a3c;
-            --text-color: #ffffff;
-            --hint-color: #8e8e93;
-            --accent-color: #00c7be;
-            --green-color: #34c759;
-            --red-color: #ff3b30;
+        :root {
+            --bg-color: #F2F2F7; /* Fond gris iOS */
+            --card-bg: #FFFFFF;
+            --text-main: #000000;
+            --text-muted: #8E8E93;
+            --primary: #000000;
+            --border: #E5E5EA;
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+            --blue: #007AFF;
+            --green: #34C759;
+            --red: #FF3B30;
         }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0; padding: 0;
             overscroll-behavior-y: none;
-            /* FOND D'ÉCRAN */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Fondecran.jpg');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            margin-bottom: 8vh;
+            padding-bottom: 100px; /* Espace Bottom Nav */
         }
 
-        /* --- Barre de chargement --- */
-        .progress-container {
-            width: 100%;
-            background-color: var(--tertiary-bg-color);
-            border-radius: 10px;
-            margin-top: 20px;
-            height: 6px;
-            overflow: hidden;
+        /* --- UTILITAIRES & PAGES --- */
+        .page { display: none; flex-direction: column; min-height: 100vh; animation: fade 0.2s ease-out; }
+        .page.active { display: flex; }
+        @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+        
+        .section-title {
+            font-size: 0.8rem; font-weight: 700; color: var(--text-muted);
+            letter-spacing: 1px; padding: 0 20px; margin: 25px 0 10px 0;
+            border-left: 3px solid var(--text-muted); margin-left: 15px;
+        }
+
+      /* --- HERO BANNER (Page d'accueil) --- */
+        .hero-banner {
             position: relative;
+            width: 100%;
+            height: 280px; 
+            overflow: hidden;
+            background: #000;
         }
-
-        .progress-bar {
-            width: 0%;
+        .hero-banner img {
+            width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, #ffffff, #71d2f2);
-            border-radius: 10px;
-            transition: width 2.5s cubic-bezier(0.25, 1, 0.5, 1);
-            box-shadow: 0 0 10px rgba(52, 199, 89, 0.5);
+            object-fit: cover;
         }
-
-        /* --- Structure générale des pages --- */
-        .page {
-            display: none;
-            flex-direction: column;
-            min-height: 100vh;
-            box-sizing: border-box;
+        /* Effet de fondu avec le fond de l'app */
+        .hero-gradient {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 60px;
+            background: linear-gradient(to top, var(--bg-color), transparent);
+            pointer-events: none;
+            z-index: 2;
         }
-
-        .page.active {
-            display: flex;
-        }
-
-        .page-header {
-            padding: 2vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: linear-gradient(360deg, #2c2c2e0f, #71d2f2a1);
-        }
-
-        .page-header .title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            font-family: Optima, sans-serif;
-        }
-
-        .close-button,
-        .back-button {
-            border: 1px solid black;
-    color: #71d2f2;
-    font-size: 1.5rem;
-    cursor: pointer;
-    width: 5vh;
-    border-radius: 20%;
-    padding: 1vh;
-    background: #000000;
-        }
-
-        .page-content {
-            flex-grow: 1;
-            padding: 1.5vh;
-        }
-
-        /* --- Écran de chargement --- */
-        #page-loader {
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
+        /* Conteneur des icônes */
+        .hero-links {
+            position: absolute;
+            bottom: 20px;
             left: 0;
             width: 100%;
-            height: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Sécurité si l'écran est trop petit */
+            gap: 12px; /* Espace optimisé pour 6 boutons */
+            z-index: 5;
+            padding: 0 10px;
+        }
+        /* Boutons réseaux sociaux (Glassmorphism "App iOS") */
+        .hero-icon {
+            width: 42px; height: 42px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px; /* Carré arrondi style Apple */
+            display: flex; align-items: center; justify-content: center;
+            color: white; 
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .hero-icon:active { transform: scale(0.9); }
+
+/* --- HEADER HEADER CLEAN --- */
+        .header {
+            background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);
+            display: flex; align-items: center; 
+            padding: 15px; position: sticky; top: 0; z-index: 50;
+            font-weight: 700; font-size: 1.1rem; border-bottom: 1px solid var(--border);
+            overflow: hidden; /* Empêche le texte de dépasser l'écran */
+        }
+        .header-back { position: absolute; left: 15px; cursor: pointer; color: var(--text-main); font-size: 1.5rem; background:none; border:none;}
+
+        /* --- STYLE UNIQUE DU LOGO CLF44 --- */
+        .logo-style {
+            /* Police massive et condensée */
+            font-family: 'Arial Black', 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            
+            /* Le fameux dégradé de couleur "Luxe" à l'intérieur du texte */
+            background: linear-gradient(135deg, #000000 0%, #5a5a5e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            /* Ombre portée pour détacher le logo du fond */
+            filter: drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.15));
+        }
+        /* Animation de rebond horizontal */
+        .bouncing-text {
+            display: inline-block;
+            white-space: nowrap;
+            /* L'animation dure 4s, est fluide (ease-in-out), infinie, et fait des allers-retours (alternate) */
+            animation: bounceX 4s ease-in-out infinite alternate;
+        }
+
+        /* 
+           Le texte se déplace de -30% à +30% de l'espace disponible.
+           Ajuste ces valeurs si tu veux qu'il aille plus ou moins loin sur les bords.
+        */
+        @keyframes bounceX {
+            0% { transform: translateX(-30vw); }
+            100% { transform: translateX(30vw); }
+        }
+        /* --- HOME SCROLLS --- */
+        .h-scroll {
+            display: flex; overflow-x: auto; gap: 15px; padding: 5px 20px 15px 20px;
+            scroll-snap-type: x mandatory; scrollbar-width: none;
+        }
+        .h-scroll::-webkit-scrollbar { display: none; }
+        
+        /* Cartes Catégories */
+        .cat-card {
+            flex: 0 0 140px; scroll-snap-align: start;
+            background: var(--card-bg); border-radius: var(--radius-md);
+            padding: 15px; text-align: center; box-shadow: var(--shadow-sm);
+            display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer;
+        }
+        .cat-card img { width: 60px; height: 60px; object-fit: contain; }
+        .cat-card .title { font-weight: 700; font-size: 0.95rem; }
+        .cat-card .flags { font-size: 0.8rem; letter-spacing: 2px;}
+
+        /* Cartes Récents / Produits */
+        .prod-card-lg {
+            flex: 0 0 220px; scroll-snap-align: start;
+            background: var(--card-bg); border-radius: var(--radius-md);
+            overflow: hidden; box-shadow: var(--shadow-sm); cursor: pointer;
+            border: 1px solid var(--border); display: flex; flex-direction: column;
+        }
+        .prod-card-lg img { width: 100%; height: 160px; object-fit: cover; }
+        .prod-card-lg .info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; }
+        .prod-card-lg .title { font-weight: 800; font-size: 1rem; margin-bottom: 5px; }
+        .prod-card-lg .badge { 
+            background: var(--primary); color: white; font-size: 0.65rem; 
+            padding: 4px 8px; border-radius: 6px; font-weight: 700; width: max-content; margin-bottom: 10px;
+        }
+        .btn-outline {
+            margin-top: auto; border: 1px solid var(--text-main); background: transparent;
+            color: var(--text-main); font-weight: 700; padding: 10px; border-radius: 10px; text-align: center;
+        }
+
+        /* Grid Tendances */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px 20px 20px; }
+
+        /* --- PAGE PRODUIT FULL ECRAN --- */
+        .prod-media-zone { width: 100%; height: 45vh; background: #000; position: fixed; top: 0; left: 0; z-index: 1;}
+        .prod-media-zone video, .prod-media-zone img { width: 100%; height: 100%; object-fit: cover; }
+      /* --- PAGE PRODUIT FULL ECRAN --- */
+        .prod-sheet {
+            background: var(--bg-color); 
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            position: relative; 
+            z-index: 2; 
+            margin-top: 40vh; 
+            min-height: 60vh; 
+            /* On augmente le padding du bas à 180px pour ne rien cacher en scrollant */
+            padding: 25px 20px 180px 20px; 
+        }
+        .prod-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+        .prod-title { font-size: 1.4rem; font-weight: 800; margin: 0; }
+        
+        .tarif-selector { display: flex; gap: 10px; overflow-x: auto; margin-bottom: 20px; padding-bottom: 5px;}
+        .tarif-selector::-webkit-scrollbar { display: none; }
+        .tarif-pill {
+            flex: 0 0 auto; border: 2px solid var(--border); border-radius: 14px;
+            padding: 12px 20px; background: var(--card-bg); text-align: center; cursor: pointer; transition: 0.2s;
+        }
+        .tarif-pill.active { border-color: var(--primary); background: #fafafa; }
+        .tarif-pill .w { font-weight: 800; font-size: 1.1rem; display: block;}
+        .tarif-pill .p { color: var(--text-muted); font-size: 0.9rem; font-weight: 600;}
+
+     /* Bottom Floating Bar (Product) */
+        .float-bar {
+            position: fixed; 
+            bottom: 85px; /* ⬅️ LA MAGIE EST ICI : On remonte au dessus de la nav */
+            left: 0; 
+            width: 100%;
+            background: rgba(255,255,255,0.95); 
+            backdrop-filter: blur(15px);
+            padding: 15px 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px;
+            border-top: 1px solid var(--border); 
+            z-index: 40; /* Juste en dessous de la nav qui est à 100 */
+        }
+        .qty-box {
+            display: flex; align-items: center; background: var(--bg-color);
+            border-radius: var(--radius-md); padding: 5px;
+        }
+        .qty-box button { background: var(--card-bg); border:none; width:36px; height:36px; border-radius:50%; font-size:1.2rem; font-weight:bold; box-shadow:var(--shadow-sm); }
+        .qty-box span { width: 40px; text-align: center; font-weight: 800; font-size: 1.1rem; }
+        .btn-black {
+            background: var(--primary); color: white; flex-grow: 1; border: none;
+            border-radius: var(--radius-md); padding: 16px; font-weight: 800; font-size: 1rem;
+            display: flex; justify-content: space-between; box-shadow: var(--shadow-md); cursor:pointer;
+        }
+
+        /* --- PAGE PROFIL VIP --- */
+        .profile-card {
+            background: var(--card-bg); border-radius: var(--radius-lg); margin: 20px;
+            padding: 20px; display: flex; gap: 20px; box-shadow: var(--shadow-sm); align-items: center;
+        }
+        .profile-pic { width: 100px; height: 130px; border-radius: var(--radius-sm); object-fit: cover; background: #eee; }
+        .profile-info { flex-grow: 1; display: flex; flex-direction: column; gap: 12px; font-size: 0.85rem;}
+        .info-line { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 8px;}
+        .info-line span:first-child { color: var(--text-muted); }
+        .info-line span:last-child { font-weight: 700; }
+        .btn-msg-plug {
+            background: #f2f2f7; border: none; padding: 8px; border-radius: 8px; font-weight: 700;
+            width: 100px; margin-top: 10px; font-size: 0.8rem; display: flex; justify-content: center; gap: 5px;
+        }
+
+        /* --- PAGE PANIER & CHECKOUT --- */
+        .cart-item {
+            background: var(--card-bg); border-radius: var(--radius-md); padding: 15px; margin: 0 20px 15px 20px;
+            display: flex; align-items: center; gap: 15px; box-shadow: var(--shadow-sm);
+        }
+        .cart-item img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; }
+        
+        .checkout-modes { display: flex; gap: 10px; padding: 0 20px; margin-bottom: 20px; }
+        .mode-btn {
+            flex: 1; padding: 12px 0; border: 1px solid var(--border); background: var(--card-bg);
+            border-radius: 12px; font-weight: 600; font-size: 0.85rem; color: var(--text-muted); transition: 0.2s;
+        }
+        .mode-btn.active { border-color: var(--primary); color: var(--primary); background: #f8f8f8; }
+
+        .info-box { background: #e5f0ff; color: #005fff; padding: 15px; border-radius: 12px; margin: 0 20px 20px; font-size: 0.85rem; font-weight: 500; display:flex; gap:10px; }
+        .recap-box { background: var(--card-bg); padding: 20px; margin: 0 20px 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
+        .address-input {
+            width: 100%; border: 1px solid var(--border); background: var(--bg-color);
+            padding: 15px; border-radius: 12px; font-family: inherit; font-size: 0.9rem; margin-top: 10px; resize: none;
+        }
+
+        /* Slider Swipe */
+        .swipe-container {
+            position: relative; height: 56px; background: #e5e5ea; border-radius: 28px;
+            margin: 20px 20px 40px 20px; overflow: hidden;
+        }
+        .swipe-text { position: absolute; width: 100%; line-height: 56px; text-align: center; font-weight: 700; color: var(--text-muted); font-size: 0.9rem; z-index: 1;}
+        .swipe-btn {
+            position: absolute; left: 4px; top: 4px; width: 48px; height: 48px; background: var(--blue);
+            border-radius: 50%; z-index: 2; display: flex; align-items: center; justify-content: center;
+            color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: background 0.3s;
+        }
+
+      /* --- BOTTOM NAV DYNAMIC PILL (10X) --- */
+        .nav-floating {
+            position: fixed;
+            bottom: 25px; /* Détaché du bas de l'écran */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 40px; /* Arrondi maximal */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
             z-index: 100;
         }
 
-        #page-loader .loader-box {
-            background: #80808082;
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid #71d2f2;
-        }
-
-        #page-loader img {
-            width: 80px;
-            height: 80px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        #page-loader .app-name {
-            font-size: 1.5rem;
+        .nav-item-float {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0; /* Pas de gap par défaut */
+            padding: 12px;
+            border-radius: 30px;
+            color: var(--text-muted);
             font-weight: 700;
-            font-family: Verdana, sans-serif;
-        }
-
-        #page-loader .loading-text {
-            color: var(--hint-color);
-            margin-top: 10px;
-            font-family: American Typewriter, serif;
-        }
-
-        /* --- Page d'accueil --- */
-        .top-marquee {
-            background: linear-gradient(180deg, #7c5a67, #71d2f2a3);
-    color: #000000;
-            padding: 8px 0;
-            overflow: hidden;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 19s linear infinite;
-        }
-
-        .marquee-content span {
-            display: inline-block;
-            padding-right: 200px;
-            white-space: nowrap;
-            font-size: 11px;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(100vw); }
-            100% { transform: translateX(-100%); }
-        }
-
-        #page-home .home-header {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 10px 15px;
-            background: linear-gradient(#71d2f2a3, transparent);
-            position: relative;
-            height: 9vh;
-        }
-
-        .home-logo {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            height: 12vh;
-            border-radius: 20%;
-            box-shadow: 0px 0px 10px 2px #71d2f2;
-        }
-
-        #page-home .cart-button {
-            background: var(--tertiary-bg-color);
-            border: none;
-            border-radius: 20%;
-            width: 40px;
-            height: 40px;
-            color: white;
-            position: relative;
+            font-size: 0.9rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0px 0px 10px 2px #71d2f2;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Animation ultra fluide */
         }
 
-        /* --- Filtres --- */
-        #quality-filter {
-            font-family: Copperplate;
-            height: 7vh;
-            font-size: 1.8vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(45deg, black, transparent);
-            border-radius: 10px;
+        /* L'état Actif : Extension et coloration */
+        .nav-item-float.active {
+            background: var(--primary);
+            color: #ffffff;
+            padding: 12px 20px; /* S'élargit */
+            gap: 8px; /* Écarte l'icône du texte */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        #quality-filter option {
-            text-align: center;
-        }
-
-        select#farm-filter {
-            display: block !important;
-            width: 100%;
-        }
-
-        .filter-select-wrapper::after #farm-filer {
-            display: none;
-        }
-
-        /* --- Cartes & Grilles --- */
-        .category-card {
-            border-radius: 15px;
+        /* Le texte est caché par défaut (largeur 0) */
+        .nav-text {
+            max-width: 0;
             overflow: hidden;
-            cursor: pointer;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
-
-        .category-card img {
-            width: 95%;
-            height: 25vh;
-            object-fit: initial;
-            border-radius: 20px;
-            margin: auto;
-            display: block;
-        }
-
-        .cart-button .cart-count {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #71d2f2;
-            color: #000000;
-            border-radius: 50%;
-            font-size: 0.7rem;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 700;
-        }
-
-        #page-home .filters {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .filter-input-wrapper,
-        .filter-select-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            background: var(--secondary-bg-color);
-            border-radius: 10px;
-            margin-top: 3vh;
-            justify-content: center;
-        }
-
-        .filter-select-wrapper::after {
-            content: '▾';
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-        }
-
-        .filter-input-wrapper input,
-        .filter-select-wrapper select {
-            padding-top: 15px;
-            padding-bottom: 15px;
-            padding-left: 50px;
-            padding-right: 40px;
-            border: none;
-            background: transparent;
-            color: var(--text-color);
-            font-size: 1rem;
-            appearance: none;
-            -webkit-appearance: none;
-            border-radius: 0;
-            line-height: normal;
-            height: auto;
-            position: relative;
-            z-index: 1;
-            width: 100%;
-        }
-
-        .filter-input-wrapper input::placeholder {
-            color: var(--hint-color);
+        
+        /* Révélation du texte quand actif */
+        .nav-item-float.active .nav-text {
+            max-width: 80px;
             opacity: 1;
         }
 
-        .filter-input-wrapper svg,
-        .filter-select-wrapper svg {
+        /* Le point rouge du panier restylisé */
+        .nav-badge-float {
             position: absolute;
-            left: 3vh;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--hint-color);
-            margin-right: 3.5vh;
-            z-index: 2;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 25px;
-            padding: 0 15px 80px 15px;
-            margin-top: 3vh;
-        }
-
-        .product-card {
-            background: linear-gradient(#f97509, #70d2f2);
-            border: 1px solid #71d2f2;
-            color: black;
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .card-badge {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            top: -2px;
+            right: -2px;
+            background: var(--red);
             color: white;
-            padding: 4px 10px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .product-flag {
-            margin-left: 5px;
-            font-size: 3vh;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #2c2c2edb;
-            height: auto;
-            width: 35px;
-            border-radius: 20%;
-        }
-
-        .product-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-        }
-
-        .product-card .info {
-            padding: 10px;
-        }
-
-        .product-card .name {
-            font-weight: 500;
-            justify-content: center;
-            display: flex;
-            align-items: center;
-            height: 6vh;
-            text-align: center;
-            font-family: Marker Felt, fantasy;
-            font-size: 20px;
-        }
-
-        .product-card .farm {
-            color: #005fff;
-            font-size: 0.8rem;
-            text-align: center;
-            border-bottom: 1px solid #005fff;
-            margin-bottom: 5px;
-        }
-
-        .product-card .price {
-            text-align: end;
-            font-family: monospace;
-        }
-
-        .no-results {
-            padding: 20px;
-            text-align: center;
-            color: var(--hint-color);
-            grid-column: 1 / -1;
-        }
-
-        /* Barre de navigation en bas */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-around;
-            background: #2c2c2ea1;
-            align-items: center;
-            padding: 10px 0;
-            z-index: 50;
-        }
-
-        .nav-item {
-            display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #000000ed;
-    text-decoration: none;
-    font-size: 0.7rem;
-    background: #8080807d;
-    border-radius: 20px;
-    width: 10vh;
-    padding: 1vh;
-    border: none;
-    box-shadow: 0px 0px 10px 2px #71d2f2;
-    cursor: pointer;
-        }
-
-        .nav-item.active {
-            color: #00d4ff;
-            background-color: #0000009c;
-        }
-
-        .nav-item svg {
-            margin-bottom: 5px;
-        }
-
-        /* --- Page Produit & Détails --- */
-        #page-product .product-video {
-            display: none !important;
-        }
-
-        /* DETAILS PRODUIT (Optimisé & Fusionné) */
-        #page-product .product-details {
-            background: rgba(44, 44, 46, 0.85) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
-            border-radius: 20px !important;
-            padding: 20px !important;
-            margin-top: 20px !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Suppression de .product-details-card et utilisation directe */
-        .product-details .name {
-            font-size: 1.8rem;
-            font-weight: 700;
-            font-family: Marker Felt, fantasy;
-            margin: 0;
-        }
-
-        .product-details .farm {
-            font-size: 1rem;
-            color: var(--hint-color);
-            margin-bottom: 25px;
-        }
-
-        .tarifs-grid-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            width: 90%;
-        }
-
-        .product-details .tarifs-title {
-            margin-top: 20px;
-            font-weight: 500;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            border-top: 1px solid var(--tertiary-bg-color);
-            padding-top: 20px;
-        }
-
-        .tarif-item {
-            padding: 10px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 20px;
-            background: linear-gradient(#f975096e, #70d2f2);
-            border: 1px solid #71d2f2;
-            color: black;
-            width: 45%;
-            height: auto;
-            flex-direction: column;
-            margin-top: 10px;
-        }
-
-        .box-tarif {
-            display: flex;
-            font-size: 25px;
-            justify-content: space-around;
-            font-family: Impact, fantasy;
-            flex-direction: column;
-            text-align: center;
-            width: 80%;
-            padding: 1vh;
-        }
-
-        .tarif-wieght, .tarif-price {
-            border-bottom: 1px solid black;
-            padding: 1vh;
-        }
-
-        .add-to-cart-btn {
-            background: #ce9a60;
-            border: 1px solid #000000;
-            border-radius: 8px;
-            color: #000000;
-            width: 60%;
-            height: 35px;
-            cursor: pointer;
+            font-size: 0.65rem;
+            font-weight: 800;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 2px solid white;
         }
 
-        .product-description {
-            font-size: 0.95rem;
-            color: #71d2f2;
-            margin-top: 15px;
-            margin-bottom: 20px;
-            line-height: 1.4;
-            border-top: 1px solid var(--tertiary-bg-color);
-            padding-top: 20px;
-            white-space: pre-wrap;
-            text-align: center;
-            font-family: "Georgia", serif;
+        /* --- MODAL SUCCESS --- */
+        .modal-overlay {
+            position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px); z-index: 999; display: none; align-items: center; justify-content: center;
         }
-
-        /* Page Panier & Confirmation */
-        .cart-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--tertiary-bg-color);
+        .modal-box {
+            background: var(--card-bg); padding: 30px 20px; border-radius: var(--radius-lg); width: 85%;
+            text-align: center; box-shadow: var(--shadow-md); animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        @keyframes pop { from{transform:scale(0.8); opacity:0;} to{transform:scale(1); opacity:1;} }
+        .modal-check { width: 60px; height: 60px; background: #e5f9e7; color: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 2rem; }
+        .modal-btn { width: 100%; padding: 14px; border-radius: 12px; font-weight: 700; margin-top: 10px; border:none; cursor:pointer;}
+        .btn-grey { background: #f2f2f7; color: var(--text-main); }
+        .btn-green { background: var(--green); color: white; }
 
-        .cart-item img {
-            width: 60px;
-            height: 60px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-
-        .cart-item .item-details {
-            flex-grow: 1;
-            background-color: #2c2c2ed9;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            border-radius: 20px;
-            font-family: New Century Schoolbook, TeX Gyre Schola, serif;
-            padding: 1vh;
-        }
-
-        .cart-item .name {
-            font-weight: 500;
-            font-family: cursive;
-            margin: 1vh 0;
-        }
-
-        .cart-item .price {
-            color: #71d2f2;
-            font-weight: 700;
-            margin-bottom: 1vh;
-        }
-
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            background: var(--tertiary-bg-color);
-            border-radius: 8px;
-        }
-
-        .quantity-selector button {
-            background: none;
-            border: none;
-            color: white;
-            padding: 8px 12px;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .quantity-selector .quantity {
-            padding: 0 10px;
-        }
-
-        .cart-summary {
-            background: #71d2f2ad;
-            color: #000000;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            font-family: New Century Schoolbook, TeX Gyre Schola, serif;
-            text-align: center;
-        }
-
-        #page-confirmation .cart-total,
-        #page-cart .cart-total {
-            background: var(--secondary-bg-color);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            font-family: Optima, sans-serif;
-        }
-        
-        #page-confirmation .cart-total { flex-direction: column; justify-content: space-between; }
-        #page-cart .cart-total { flex-direction: row; justify-content: space-between; }
-
-        .cart-actions {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 8vh;
-        }
-
-        .main-action-btn {
-            background: #71d2f2ba;
-            color: #000000;
-            padding: 15px;
-            border-radius: 10px;
-            border: none;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .secondary-action-btn {
-            background: var(--secondary-bg-color);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            border: none;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .main-action-btn:disabled,
-        .secondary-action-btn:disabled {
-            background: var(--tertiary-bg-color);
-            color: var(--hint-color);
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        /* --- Notification Toast --- */
-        #notification-toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #71d2f291;
-            color: black;
-            text-align: center;
-            border-radius: 10px;
-            padding: 16px;
-            position: fixed;
-            z-index: 101;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 30px;
-            font-size: 1rem;
-            font-weight: 500;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: visibility 0.5s, opacity 0.5s, transform 0.5s;
-        }
-
-        #notification-toast.show {
-            visibility: visible;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-
-        @keyframes fadein {
-            from { bottom: 0; opacity: 0; }
-            to { bottom: 30px; opacity: 1; }
-        }
-
-        @keyframes fadeout {
-            from { bottom: 30px; opacity: 1; }
-            to { bottom: 0; opacity: 0; }
-        }
-
-        /* --- Page Info / Contact --- */
-        #page-info .page-content,
-        #page-contact .page-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 1vh;
-        }
-
-        #page-info .contact-logo,
-        #page-contact .contact-logo {
-            height: 15vh;
-            width: 15vh;
-            margin-bottom: 6vh;
-            border-radius: 20px;
-            box-shadow: 0px 0px 10px 2px #71d2f2;
-            margin-top: 2vh;
-        }
-
-        #page-info .contact-card,
-        #page-contact .contact-card {
-            background: rgba(44, 44, 46, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            box-sizing: border-box;
-            box-shadow: 0px 0px 10px 2px #71d2f2;
-            margin-top: 2vh;
-        }
-
-        .contact-links-list a {
-            align-items: center;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 12px;
-            text-decoration: none;
-            color: white;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            height: 6vh;
-            display: flex;
-            justify-content: center;
-            font-size: 2.2vh;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .contact-links-list a:active { transform: scale(0.98); }
-
-        /* Couleurs Links */
-        .contact-link.snapchat { background: linear-gradient(45deg, #fff108 0%, #b93800 100%); color: black !important; }
-        .contact-link.snapchat svg { stroke: black !important; }
-        .contact-link.signal { background: linear-gradient(45deg, #3A9EFD 0%, #002860 100%); }
-        .contact-link.whatsapp { background: linear-gradient(45deg, #27ff78 0%, #0a7d00 100%); }
-        .contact-link.telegram { background: linear-gradient(45deg, #2a67ee 0%, #16e6d5 100%); color: black !important; }
-        .contact-link.secours { background: linear-gradient(45deg, #00d2ff 0%, #3a7bd5 100%); color: black !important; }
-        .contact-link.potato { background: linear-gradient(45deg, #7d1a03 0%, #f16101 100%);color: black !important;  }
-        .contact-link.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: black !important; }
-        a.contact-link.luffa {
-    background: linear-gradient(45deg, #00ff85 0%, #303030 100%);
-    color: black;
-}
-        /* Accordéon Style */
-        .accordion-container { width: 100%; text-align: center; }
-        .accordion-item {
-            background: var(--secondary-bg-color);
-            border-radius: 15px;
-            margin-bottom: 10px;
-            overflow: hidden;
-            border: 1px solid var(--tertiary-bg-color);
-        }
-
-      /* --- NOUVEAU STYLE DES HEADERS ACCORDÉON --- */
-.accordion-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 20px;
-    cursor: pointer;
-    border-radius: 12px;
-    border: none;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    transition: transform 0.2s ease;
-    height: auto;
-}
-
-.accordion-header:active {
-    transform: scale(0.98);
-}
-
-/* Couleurs spécifiques par bouton */
-.btn-reseaux { background: linear-gradient(90deg, #00c7be, #007aff); color: white; }
-.btn-livraison { background: linear-gradient(90deg, #ff9500, #ff5e00); color: white; }
-.btn-horaires { background: linear-gradient(90deg, #34c759, #158532); color: white; }
-.btn-meetup { background: linear-gradient(90deg, #af52de, #5e5ce6); color: white; }
-
-/* On cache l'ancienne image et on affiche le texte */
-.accordion-header .ImgReseaux { display: none; }
-.accordion-header span { 
-    display: inline-block !important; 
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-}
-
-.accordion-arrow {
-    margin: 0 !important;
-    background: rgb(0 0 0 / 57%) !important;
-}
-        .accordion-item.active .accordion-arrow { transform: rotate(180deg); }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-            background: var(--tertiary-bg-color);
-        }
-        .accordion-content p {
-            padding: 15px;
-            margin: 0;
-            color: var(--hint-color);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        .accordion-item.active .accordion-content { max-height: 1000px; padding-top: 0; }
-
-        /* Promos & Paiement */
-        .promo-container, .payment-selector {
-            margin-top: 20px;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--tertiary-bg-color);
-            display: none;
-        }
-        #promo-input-container { display: flex; gap: 10px; }
-        #promo-code-input { flex-grow: 1; padding: 15px; border: none; background: var(--secondary-bg-color); border-radius: 10px; color: var(--text-color); }
-        #apply-promo-btn { padding: 15px; flex-shrink: 0; }
-        #promo-applied-container { display: flex; justify-content: space-between; background: var(--tertiary-bg-color); padding: 15px; border-radius: 10px; color: var(--green-color); }
-        #remove-promo-btn { background: none; border: none; color: var(--red-color); font-size: 1.5rem; cursor: pointer; }
-
-        .payment-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .payment-btn { background: var(--secondary-bg-color); color: var(--hint-color); border: 2px solid var(--secondary-bg-color); padding: 15px; border-radius: 10px; cursor: pointer; }
-        .payment-btn.active { color: var(--text-color); border-color: #489fc9; background-color: var(--tertiary-bg-color); }
-
-        #confirmation-summary .summary-line.total {
-            font-size: 1.2rem;
-            font-weight: 700;
-            border-top: 1px solid var(--tertiary-bg-color);
-            margin-top: 10px;
-            padding-top: 10px;
-            width: 80%;
-            text-align: center;
-        }
-        #confirmation-summary .summary-line.discount { color: var(--green-color); }
-
-        .product-item-card.unclickable img { opacity: 0.7; }
-
-        /* --- STYLE DES BOUTONS LISTE (FARMS) --- */
-        .farm-list-btn {
-            border: none;
-            outline: none;
-            padding: 20px;
-            background: linear-gradient(45deg, #71d2f2 0%, #f97509 80%, #005c30 100%, transparent);
-            background-size: 200% auto;
-            color: #ed9c27;
-            font-family: 'Impact', 'Copperplate', sans-serif;
-            font-size: 1.3rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px #71d2f2;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: transform 0.1s ease, box-shadow 0.2s ease;
-        }
-        .farm-list-btn:active { background-color: #3a3a3c; transform: scale(0.98); }
-        .farm-btn-left { display: flex; align-items: center; gap: 15px; }
-        .farm-btn-icon { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid #3a3a3c; }
-        .farm-btn-info { display: flex; flex-direction: column; }
-        .farm-btn-title { font-size: 25px; font-weight: 600; color: #000000; }
-        .farm-btn-subtitle { font-size: 0.8rem; color: #1c1cf0; margin-top: 2px; }
-        .farm-btn-right svg { display: block; background-color: #000; height: 3vh; width: 3vh; border-radius: 5px; }
-
-        /* --- Galerie, Variantes & Carrousel --- */
-        .product-gallery-wrapper {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 10px;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            -webkit-overflow-scrolling: touch;
-        }
-        .product-gallery-wrapper::-webkit-scrollbar { display: none; }
-        .gallery-item { flex: 0 0 100%; scroll-snap-align: center; height: 350px; border-radius: 12px; overflow: hidden; background: #000; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-        .gallery-item video {
-    width: 100%;
-    height: auto;
-    max-height: 70vh; /* Évite que la vidéo soit trop longue */
-    object-fit: contain;
-    background: #000;
-}
-        .gallery-counter { text-align: center; color: #8e8e93; font-size: 0.8rem; margin-top: -5px; margin-bottom: 10px; }
-
-        .variant-selector-container { margin-bottom: 20px; background: #252525; padding: 15px; border-radius: 12px; }
-        .variant-title { font-size: 0.95rem; color: #8e8e93; margin-bottom: 10px; font-weight: 600; }
-        .variant-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .variant-btn { background: #3a3a3c; border: 2px solid transparent; color: white; padding: 12px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .variant-btn .emoji { font-size: 1.2rem; }
-        .variant-btn.active { background: #fff; color: #000; border-color: #fff; transform: scale(0.98); }
-
-        /* Couleurs variantes */
-        .style-purple.active, .add-to-cart-btn.style-purple { background: #9d4edd !important; border-color: #9d4edd !important; color: white !important; box-shadow: 0 0 15px rgba(157, 78, 221, 0.4); }
-        .style-red.active, .add-to-cart-btn.style-red { background: #ef233c !important; border-color: #ef233c !important; color: white !important; box-shadow: 0 0 15px rgba(239, 35, 60, 0.4); }
-        .style-green.active, .add-to-cart-btn.style-green { background: #70e000 !important; border-color: #70e000 !important; color: black !important; box-shadow: 0 0 15px rgba(112, 224, 0, 0.4); }
-        .style-yellow.active, .add-to-cart-btn.style-yellow { background: #ffcc00 !important; border-color: #ffcc00 !important; color: black !important; box-shadow: 0 0 15px rgba(255, 204, 0, 0.4); }
-        .style-orange.active, .add-to-cart-btn.style-orange { background: #fb8500 !important; border-color: #fb8500 !important; color: white !important; box-shadow: 0 0 15px rgba(251, 133, 0, 0.4); }
-        .style-brown.active, .add-to-cart-btn.style-brown { background: #7f5539 !important; border-color: #7f5539 !important; color: white !important; box-shadow: 0 0 15px rgba(127, 85, 57, 0.4); }
-        .style-passion.active, .add-to-cart-btn.style-passion { background: #ff006e !important; border-color: #ff006e !important; color: white !important; box-shadow: 0 0 15px rgba(255, 0, 110, 0.5); }
-        .style-melon.active, .add-to-cart-btn.style-melon { background: #00b4d8 !important; border-color: #00b4d8 !important; color: white !important; box-shadow: 0 0 15px rgba(0, 180, 216, 0.5); }
-/* STYLE GMO 🔬 (Vert Olive "Gas" / Toxique) */
-.style-gmo.active,
-.add-to-cart-btn.style-gmo {
-    background: #556b2f !important; /* Dark Olive Green */
-    border-color: #556b2f !important;
-    color: white !important;
-    box-shadow: 0 0 15px rgba(85, 107, 47, 0.6); /* Lueur Olive */
-}
-
-/* STYLE LAMPONIE 🍓 (Rouge Framboise Gourmand) */
-.style-lampo.active,
-.add-to-cart-btn.style-lampo {
-    background: #d90429 !important; /* Rouge Framboise Vif */
-    border-color: #d90429 !important;
-    color: white !important;
-    box-shadow: 0 0 15px rgba(217, 4, 41, 0.6); /* Lueur Rouge */
-}
-
-/* STYLE TANGIER 🍊 (Orange Agrume / Zesté) */
-.style-tangier.active,
-.add-to-cart-btn.style-tangier {
-    background: #ff9f1c !important; /* Orange Tangerine Vif */
-    border-color: #ff9f1c !important;
-    color: black !important; /* Texte noir pour lisibilité sur l'orange */
-    box-shadow: 0 0 15px rgba(255, 159, 28, 0.6); /* Lueur Orange */
-}
-
-/* STYLE GRAPPE 🍇 (Violet Raisin Profond) */
-.style-grappe.active,
-.add-to-cart-btn.style-grappe {
-    background: #7209b7 !important; /* Violet "Grape Soda" */
-    border-color: #7209b7 !important;
-    color: white !important;
-    box-shadow: 0 0 15px rgba(114, 9, 183, 0.6); /* Lueur Violette */
-}
-        .pack-content-container { width: 100%; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
-        .pack-item-btn { background: #3a3a3c; color: white; padding: 12px 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 0.95rem; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .pack-item-btn:active { background: #505053; transform: scale(0.98); }
-        .pack-arrow { color: #8e8e93; font-size: 1.2rem; }
-        .product-card.full-width { grid-column: 1 / -1; background: linear-gradient(145deg, #2c2c2e, #3a1c42); border: 1px solid #b115ff; }
-        .product-card.full-width img { height: 180px; }
-
-        /* Page AVIS & Carrousel */
-        .avis-content { display: flex; flex-direction: column; align-items: center; padding-bottom: 80px; }
-        .page-title { margin-top: 20px; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px; font-family: Marker Felt, fantasy; }
-        .subtitle { color: #8e8e93; font-size: 0.9rem; margin-bottom: 20px; }
-        .carousel-container { width: 100%; margin-bottom: 30px; }
-        .carousel-track { display: flex; gap: 15px; overflow-x: auto; padding: 10px 20px; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; }
-        .carousel-track::-webkit-scrollbar { display: none; }
-        .carousel-card { flex: 0 0 75%; scroll-snap-align: center; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: transform 0.3s ease; }
-        .carousel-card img { width: 100%; height: auto; display: block; border-radius: 15px; }
-        .swipe-indicator { text-align: center; font-size: 0.8rem; color: #6e6e73; margin-top: 10px; animation: bounceRight 2s infinite; }
-        @keyframes bounceRight { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
-        
-        .potato-btn { background: linear-gradient(45deg, #7d1a03 0%, #f16101 100%); color: black; font-weight: bold; width: 90%; margin: 0 auto; display: none; }
-
-        /* Modale Zoom */
-        .image-modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
-        .modal-content { max-width: 90%; max-height: 90%; border-radius: 10px; }
-        .close-modal { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 
 <body>
-    <div id="page-contact" class="page">
-        <div class="page-content">
-            <img src="LogoReel.jpg" alt="Logo" class="contact-logo">
-            <div class="contact-card">
 
-                <div id="contact-links-container" class="contact-links-list">
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div id="page-info" class="page">
-        <div class="page-content">
-            <img src="LogoReel.jpg" alt="Logo" class="contact-logo">
-            <div class="contact-card">
-                <div class="accordion-container">
-                    <div class="accordion-item">
-                        <button class="accordion-header btn-reseaux">
-                            <span>🌐 NOS RÉSEAUX</span>
-                            <svg class="accordion-arrow" width="24" height="24" viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
-                            </svg>
-                        </button>
-                        <div class="accordion-content">
-                            <p style="text-align: center; color: white; line-height: 1.8;">
-                                🛍️ <strong>Telegram</strong> : Passer commande / Renseignement <br>
-                                🔐 <strong>Potato / Luffa </strong> : Contact Secours<br><br>
-                                <span style="color: #ff5252; font-weight: bold;">✅ Commandes uniquement sur Telegram</span>
-                            </p>
-                        </div>
-                    </div>
-                
-                    <div class="accordion-item">
-                        <button class="accordion-header btn-livraison">
-                            <span>🚀 LIVRAISON</span>
-                            <svg class="accordion-arrow" width="24" height="24" viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
-                            </svg>
-                        </button>
-                        <div class="accordion-content">
-                            <p style="text-align: center; color: white; line-height: 1.6;">
-                                🚚 <strong>NANTES & ALENTOURS</strong><br>
-                                🌊 <strong>BRETAGNE / VENDÉE</strong><br><br>
-                                ⏱ Livraison rapide et discrète.<br>
-                                <span style="color: #0088cc; font-weight: bold;">⚠️ Prise de commande sur Telegram</span>
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item">
-                        <button class="accordion-header btn-horaires">
-                            <span>⏰ HORAIRES</span>
-                            <svg class="accordion-arrow" width="24" height="24" viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
-                            </svg>
-                        </button>
-                        <div class="accordion-content">
-                            <p style="text-align: center; color: white; line-height: 1.8;">
-                                📲 <strong>Prise de commande</strong> : 12h — 22h<br>
-                                🚗 <strong>Livraisons</strong> : 14h — 02h<br>
-                                <span style="font-style: italic; font-size: 0.9em; color: #8e8e93;">Disponible 7j/7</span>
-                            </p>
-                        </div>
-                    </div>
-                
-                    <div class="accordion-item">
-                        <button class="accordion-header btn-meetup">
-                            <span>📍 POINT DE RDV</span>
-                            <svg class="accordion-arrow" width="24" height="24" viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
-                            </svg>
-                        </button>
-                        <div class="accordion-content">
-                            <p style="text-align: center; color: white; line-height: 1.8;">
-                                🤝 <strong>MEET-UP RÉSERVÉ</strong><br>
-                                📦 Uniquement pour grosses commandes.<br>
-                                Lieu communiqué après validation.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+   <!-- SVG ICONS -->
     <svg width="0" height="0" style="position:absolute">
         <defs>
-            <symbol id="icon-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-            </symbol>
-            <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </symbol>
-            <symbol id="icon-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-            </symbol>
-            <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </symbol>
-            <symbol id="icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </symbol>
-            <symbol id="icon-contact" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path
-                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                </path>
-            </symbol>
-            <symbol id="icon-quality" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polygon
-                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                </polygon>
-            </symbol>
-            <symbol id="icon-farm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14.5 9.5L9.5 4.5l-5 5L1 11l4.5 4.5 5-5 4.5-4.5z"></path>
-                <path d="M19.5 14.5L14.5 9.5l-5 5L1 21h8l4.5-4.5 5-5 4.5-4.5z"></path>
-            </symbol>
-            <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </symbol>
-            <symbol id="icon-telegram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
+            <!-- Les icônes de base de l'App iOS -->
+            <symbol id="ic-home" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l8 6v12h-5v-7h-6v7H4V9l8-6z"/></symbol>
+            <symbol id="ic-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></symbol>
+            <symbol id="ic-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
+            <symbol id="ic-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></symbol>
+            <symbol id="ic-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></symbol>
+            
+            <!-- TES ICONES RÉSEAUX SOCIAUX AJOUTÉES ICI 👇 -->
+            <symbol id="icon-telegram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M22 2 L11 13 L2 9 L22 2 Z M22 2 L15 22 L11 13 L2 9 L22 2 Z"></path>
             </symbol>
-            <symbol id="icon-whatsapp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path
-                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
-                </path>
-            </symbol>
-            <symbol id="icon-snapchat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path
-                    d="M12 1.5C6.2 1.5 1.5 6.2 1.5 12c0 5.8 4.7 10.5 10.5 10.5S22.5 17.8 22.5 12c0-5.8-4.7-10.5-10.5-10.5zm-2.3 12.9c-.3 0-.6-.1-.8-.4-.5-.5-.5-1.3 0-1.8l3.1-3.1c.5-.5 1.3-.5 1.8 0 .5.5.5 1.3 0 1.8l-3.1 3.1c-.2.3-.5.4-.8.4z" />
-            </symbol>
-            <symbol id="icon-potato" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+            <symbol id="icon-potato" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
                 <circle cx="10" cy="10" r="1.5" />
                 <circle cx="14" cy="14" r="1.5" />
                 <circle cx="14" cy="10" r="1.5" />
                 <circle cx="10" cy="14" r="1.5" />
             </symbol>
-            <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </symbol>
-            <symbol id="icon-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
+            <symbol id="icon-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path>
                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path>
             </symbol>
-
         </defs>
     </svg>
 
-    <div id="page-loader" class="page active">
-        <div class="loader-box">
-            <img src="LogoReel.jpg" alt="Logo">
-            <div class="app-name">🥷🏻 CLF44 🥷🏻</div>
-            <div class="loading-text">Chargement de CLF44Bot...</div>
-
-            <div class="progress-container">
-                <div class="progress-bar" id="myBar"></div>
-            </div>
-
+    <!-- SUCCESS MODAL -->
+    <div class="modal-overlay" id="success-modal">
+        <div class="modal-box">
+            <div class="modal-check">✓</div>
+            <h2 style="margin:0 0 5px 0;">Produit ajouté !</h2>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom: 20px;">Le produit a été ajouté à votre panier avec succès.</p>
+            <button class="modal-btn btn-grey" onclick="document.getElementById('success-modal').style.display='none'">Continuer les achats</button>
+            <button class="modal-btn btn-green" onclick="document.getElementById('success-modal').style.display='none'; navigate('cart');">Voir mon panier</button>
         </div>
     </div>
 
-    <div id="page-home" class="page">
-        <div class="top-marquee">
-            <div class="marquee-content">
-                <span> BEST SELECTION 2025/26 🏆 </span>
-                <span>REJOINGNIEZ NOS RESEAUX 📲</span>
-                <span> BEST SELECTION 2025/26 🏆 </span>
-                <span>REJOINGNIEZ NOS RESEAUX 📲</span>
-                <span> BEST SELECTION 2025/26 🏆 </span>
-                <span>REJOINGNIEZ NOS RESEAUX 📲</span>
-                <span> BEST SELECTION 2025/26 🏆 </span>
-                <span>REJOINGNIEZ NOS RESEAUX 📲</span>
-
-            </div>
-        </div>
-        <div class="home-header">
-            <img src="LogoReel.jpg" alt="Logo" class="home-logo">
-            <button class="cart-button" id="home-cart-button">
-                <svg width="20" height="20">
-                    <use href="#icon-cart" />
-                </svg>
-                <span class="cart-count">0</span>
-            </button>
-        </div>
-
-        <div class="filters">
-            <div class="filter-input-wrapper" style="display:none ;">
-                <svg width="20" height="20">
-                    <use href="#icon-search" />
-                </svg>
-                <input type="text" id="search-filter" placeholder="Rechercher un produit...">
-            </div>
-            <div class="filter-select-wrapper">
-                <svg width="20" height="20">
-                    <use href="#icon-quality" />
-                </svg>
-                <select id="quality-filter"></select>
-            </div>
-            <div class="filter-select-wrapper" style="display:none ;">
-                <!--  <svg width="20" height="20">
-                    <use href="#icon-farm" />
-                </svg> -->
-                <select id="farm-filter"></select>
-            </div>
-        </div>
-        <div id="product-list" class="product-grid">
-        </div>
-    </div>
-
-    <div id="page-product" class="page">
-        <div class="page-header">
-            <button class="back-button">‹</button>
-            <span class="title" id="product-page-title"></span>
-            <button class="close-button">×</button>
-        </div>
-        <div class="page-content">
-            <video class="product-video" poster="https://placehold.co/400x711/000000/ffffff?text=Video"
-                controls></video>
-            <div id="product-details-content" class="product-details">
-            </div>
-        </div>
-    </div>
-
-    <div id="page-cart" class="page">
-        <div class="page-header">
-            <span class="title">Mon Panier</span>
-            <button class="close-button">×</button>
-        </div>
-        <div class="page-content">
-            <div id="cart-items-container">
-            </div>
-        </div>
-        <div class="cart-actions">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="cart-total-price">0.00€</span>
-            </div>
-            <button id="checkout-button" class="main-action-btn">Commander</button>
-            <button id="cart-continue-shopping" class="secondary-action-btn">Continuer les achats</button>
-        </div>
-    </div>
-
-    <div id="page-confirmation" class="page">
-        <div class="page-header">
-            <span class="title">Détails de votre commande</span>
-            <button class="close-button">×</button>
-        </div>
-        <div class="page-content">
-            <div class="cart-summary">
-                <span class="resume">🗓 Résumé de la commande</span>
-                <p>
-                    <span id="confirmation-items-count">0 article</span> <br>
-                    <span class="total">Total: <span id="confirmation-total-price">0.00€</span></span>
-                </p>
-            </div>
-            <h4>Détail des articles</h4>
-            <div id="confirmation-items-list">
-            </div>
-
-            <div class="promo-container">
-                <h4>Code Promo</h4>
-                <div id="promo-input-container">
-                    <input type="text" id="promo-code-input" placeholder="Votre code...">
-                    <button id="apply-promo-btn" class="secondary-action-btn">Appliquer</button>
-                </div>
-                <div id="promo-applied-container" style="display:none;">
-                    <span id="promo-applied-text"></span>
-                    <button id="remove-promo-btn">×</button>
-                </div>
-            </div>
-            <div class="address-container" style="margin-top: 20px; padding: 15px 0; border-bottom: 1px solid var(--tertiary-bg-color);">
-                <h4 style="margin-bottom: 10px;">📍 Adresse de livraison</h4>
-                <textarea id="delivery-address" 
-                          placeholder="Ex: 12 rue des Fleurs, 30000 Nîmes (Appartement, Étage, Code...)" 
-                          style="width: 100%; min-height: 80px; padding: 12px; border-radius: 10px; background: var(--secondary-bg-color); color: white; border: 1px solid var(--tertiary-bg-color); font-family: inherit; resize: none; box-sizing: border-box;"></textarea>
-            </div>
-
-            <div class="payment-selector">
-                <h4>Paiement</h4>
-                <div class="payment-options">
-                    <button class="payment-btn active" data-method="Espèce">💵 Espèce</button>
-                    <button class="payment-btn" data-method="Crypto">₿ Crypto</button>
-                </div>
-            </div>
-
-            <div class="cart-total" id="confirmation-summary">
-            </div>
-            <!--   <div class="cart-total">
-                <span>💰 Total final:</span>
-                <span id="confirmation-final-price">0.00€</span>
-            </div> -->
-        </div>
-        <div class="cart-actions">
-
-            <button id="confirmation-modify-order" class="secondary-action-btn">✏️ Modifier</button>
-
-            <p class="confirmation-instructions">
-                Cliquez pour copier votre commande, puis contactez-nous :
-            </p>
-            <button id="confirm-order-button" class="secondary-action-btn telegram-button" disabled>
-                <span></span>
-            </button>
-        </div>
-    </div>
-
-    <div id="page-avis" class="page">
-        <div class="page-content avis-content">
+<!-- PAGE: HOME -->
+    <div id="page-home" class="page active">
+        
+        <!-- NOUVEAU HERO BANNER AVEC TES 6 LIENS -->
+        <div class="hero-banner">
+            <img src="LogoReel.jpg" alt="CLF44">
             
-            <h2 class="page-title">ILS NOUS FONT CONFIANCE 🤝</h2>
-            <p class="subtitle">Quelques retours de nos clients fidèles</p>
-    
-            <div class="carousel-container">
-                <!-- <div class="carousel-track">
-                    <div class="carousel-card">
-                        <img src="Avis1.jpg" alt="Avis client 1" onclick="openImage(this)">
-                    </div>
-                    <div class="carousel-card">
-                        <img src="Avis2.jpg" alt="Avis client 2" onclick="openImage(this)">
-                    </div>
-                    <div class="carousel-card">
-                        <img src="Avis3.jpg" alt="Avis client 3" onclick="openImage(this)">
-                    </div>
-                     <div class="carousel-card">
-                        <img src="Avis4.jpg" alt="Avis client 4" onclick="openImage(this)">
-                    </div>
-                    <div class="carousel-card">
-                        <img src="Avis5.jpg" alt="Avis client 5" onclick="openImage(this)">
-                    </div>
-                </div>
-                <div class="swipe-indicator">Swipe pour voir la suite ➡️</div> -->
+            <div class="hero-links">
+                <!-- 1. CONTACT TELEGRAM 🔌 -->
+                <a href="https://t.me/CLF_44" target="_blank" class="hero-icon">
+                    <svg width="22" height="22"><use href="#icon-telegram"/></svg>
+                </a>
+                
+                <!-- 2. CANAL POTATO 🥔 -->
+                <a href="https://duanym138.org/clff44" target="_blank" class="hero-icon">
+                    <svg width="22" height="22"><use href="#icon-potato"/></svg>
+                </a>
+                
+                <!-- 3. CONTACT POTATO 🥔 -->
+                <a href="https://dympt.org/00021da08c0340e3335f6b00d58932575ff" target="_blank" class="hero-icon">
+                    <svg width="22" height="22"><use href="#icon-potato"/></svg>
+                </a>
+
+                <!-- 4. CANAL LUFFA 🌐 -->
+                <a href="https://callup.luffa.im/c/PAQUiNJTLrC" target="_blank" class="hero-icon">
+                    <svg width="22" height="22"><use href="#icon-link"/></svg>
+                </a>
+
+                <!-- 5. CONTACT LUFFA 🌐 -->
+                <a href="https://callup.luffa.im/p/GaiKL39CCAL" target="_blank" class="hero-icon">
+                    <svg width="22" height="22"><use href="#icon-link"/></svg>
+                </a>
+
+                <!-- 6. INSTA'BIO 🔗 -->
+                <a href="https://instabio.cc/CLF44nantes" target="_blank" class="hero-icon">
+                    <svg width="22" height="22"><use href="#icon-instagram"/></svg>
+                </a>
             </div>
-    
-            <div class="avis-footer">
-                <button id="btn-open-channel" class="main-action-btn potato-btn">
-                    VOIR TOUS LES AVIS SUR POTATO 🥔
-                </button>
-            </div>
-    
+            
+            <div class="hero-gradient"></div>
+        </div>
+
+        <!-- Header du shop -->
+<div class="header" style="border-top: none; justify-content: center;">
+    <span class="bouncing-text logo-style">CLF44 SHOP 🥷🏻</span>
+</div>        
+        <!-- SECTION 1 : CATÉGORIES -->
+        <div class="section-title">| CATÉGORIES</div>
+        <div class="h-scroll" id="cat-scroll">
+            <!-- Rendu JS -->
+        </div>
+
+        <!-- SECTION 2 : RÉCENTS -->
+        <div class="section-title">| RÉCENTS</div>
+        <div class="h-scroll" id="recent-scroll">
+            <!-- Rendu JS -->
+        </div>
+
+        <!-- SECTION 3 : TENDANCES -->
+        <div class="section-title">| TENDANCES</div>
+        <div class="grid-2" id="trend-grid">
+            <!-- Rendu JS -->
         </div>
     </div>
 
-    <div id="image-modal" class="image-modal">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="img-in-modal">
+    <!-- PAGE: CATEGORY LIST (Quand on clique sur Weed ou Hash) -->
+    <div id="page-cat-list" class="page">
+        <div class="header">
+            <button class="header-back" onclick="navigate('home')">‹</button>
+            <span id="cat-list-title">Catégorie</span>
+        </div>
+        <div class="grid-2" id="cat-list-grid" style="padding-top: 20px;"></div>
     </div>
 
+    <!-- PAGE: PRODUCT -->
+    <div id="page-product" class="page">
+        <button class="product-close-btn" style="position:fixed; top:20px; left:20px; z-index:10; background:rgba(255,255,255,0.8); border:none; width:35px; height:35px; border-radius:50%; font-size:1.5rem; display:flex; align-items:center; justify-content:center;" onclick="navigate('home')">‹</button>
+        
+        <div class="prod-media-zone" id="prod-media"></div>
 
-    <div class="bottom-nav">
-        <button id="nav-menu" data-page="page-home" class="nav-item active">
-            <svg width="20" height="20">
-                <use href="#icon-home" />
-            </svg>
-            <p style="
-            margin: inherit;"> HOME </p>
-        </button>
-        <button id="nav-info" data-page="page-info" class="nav-item">
-            <svg width="20" height="20">
-                <use href="#icon-info" />
-            </svg>
-            <p style="margin: inherit;"> INFO </p>
-        </button>
-        <button id="nav-contact" data-page="page-contact" class="nav-item">
-            <svg width="20" height="20">
-                <use href="#icon-link" />
-            </svg>
-            <p style="
-            margin: inherit;"> LINKS </p>
-        </button>
-       <!--  <button id="nav-avis" data-page="page-avis" class="nav-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-            </svg>
-            <p style="margin: inherit;"> AVIS </p>
-        </button> -->
+        <div class="prod-sheet">
+            <div class="prod-title-row">
+                <h2 class="prod-title" id="p-name">Nom</h2>
+            </div>
+            
+            <div id="variants-zone" style="display:none; margin-top: 20px;">
+                <h4 style="margin:0 0 10px 0; font-size:0.9rem;">Saveur / Variante</h4>
+                <div class="tarif-selector" id="p-variants"></div>
+            </div>
+
+            <h4 style="margin:20px 0 10px 0; font-size:0.9rem; color:var(--text-muted);">TARIFS</h4>
+            <div class="tarif-selector" id="p-tarifs"></div>
+            
+            <p id="p-desc" style="color:#555; font-size:0.9rem; line-height:1.5; margin-top:10px;"></p>
+        </div>
+
+        <div class="float-bar">
+            <div class="qty-box">
+                <button id="p-minus">-</button>
+                <span id="p-qty">1</span>
+                <button id="p-plus">+</button>
+            </div>
+            <button class="btn-black" id="p-add">
+                <span>AJOUTER AU PANIER</span>
+                <span id="p-total">0.00€</span>
+            </button>
+        </div>
     </div>
 
-    <div id="notification-toast"></div>
+    <!-- PAGE: PROFILE (VIP) -->
+    <div id="page-profile" class="page">
+        <div class="header">
+            <span style="flex-grow:1; text-align:center;">Profil</span>
+        </div>
+        
+        <div class="profile-card">
+            <div>
+                <img src="LogoReel.jpg" class="profile-pic" id="prof-img">
+                <button class="btn-msg-plug"><svg width="14" height="14"><use href="#ic-send"/></svg> Message</button>
+            </div>
+            <div class="profile-info">
+                <div class="info-line"><span>Pseudo</span><span id="prof-pseudo">-</span></div>
+                <div class="info-line"><span>ID Telegram</span><span id="prof-id">-</span></div>
+                <div class="info-line"><span>Lié depuis</span><span>01/05/2026</span></div>
+                <div class="info-line"><span>Statut</span><span style="color:var(--green)">✓ Connecté</span></div>
+            </div>
+        </div>
+
+        <div style="background:var(--card-bg); margin: 0 20px; border-radius:var(--radius-lg); padding:20px; box-shadow:var(--shadow-sm);">
+            <h3 style="margin-top:0;">Bienvenue ⭐</h3>
+            <p style="font-size:0.9rem; color:#444; line-height:1.8;">
+                📦 Service de livraison ouvert 7j/7<br>
+                ⏰ Horaires : 12h - 02h<br>
+                🤝 Meet-up disponible<br>
+                ⚡️ Objectif : Rapide, efficace et fiable.
+            </p>
+        </div>
+    </div>
+
+    <!-- PAGE: CART -->
+    <div id="page-cart" class="page">
+        <div class="header"><span style="flex-grow:1; text-align:center;">Mon Panier</span></div>
+<div id="cart-list" style="padding-top: 20px; padding-bottom: 160px; overflow-y: auto;"></div>        
+<div style="position:fixed; bottom:80px; width:100%; background:var(--bg-color); padding: 20px; border-top: 1px solid var(--border);">            <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.2rem; margin-bottom:15px;">
+                <span id="cart-recap-text">Total (0 articles)</span>
+                <span id="cart-total-display">0€</span>
+            </div>
+            <button class="btn-black" style="width:100%; justify-content:center;" onclick="navigate('checkout')">Valider le panier</button>
+        </div>
+    </div>
+
+    <!-- PAGE: CHECKOUT -->
+    <div id="page-checkout" class="page">
+        <div class="header">
+            <button class="header-back" onclick="navigate('cart')">‹</button>
+            <span style="flex-grow:1; text-align:center;">Finaliser la commande</span>
+        </div>
+        
+        <p style="padding: 0 20px; font-weight:700; font-size:0.8rem; color:var(--text-muted); margin-top:20px;">MODE DE RETRAIT</p>
+        <div class="checkout-modes">
+            <button class="mode-btn active" data-m="Livraison">🚚 Livraison</button>
+            <button class="mode-btn" data-m="Meet-up">🤝 Meet-up</button>
+            <button class="mode-btn" data-m="Envoi colis">📦 Envoi colis</button>
+        </div>
+
+        <div class="info-box" id="info-box-mode">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <span id="info-text">L'adresse vous sera communiquée en message privé par le standard.</span>
+        </div>
+
+        <div class="recap-box">
+            <h4 style="margin:0 0 15px 0; color:var(--text-muted); font-size:0.8rem;">RÉCAPITULATIF DE LA COMMANDE</h4>
+            <div id="checkout-items" style="font-size:0.9rem; line-height:1.6; margin-bottom:10px;"></div>
+            <div style="font-weight:800; margin-bottom:10px;" id="checkout-total">Total: 0.00€</div>
+            
+            <textarea class="address-input" id="address-field" placeholder="Entrez votre adresse complète..."></textarea>
+        </div>
+
+        <div class="swipe-container" id="swipe-box">
+            <div class="swipe-text">Glissez pour ouvrir Telegram</div>
+            <div class="swipe-btn" id="swipe-btn">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+        </div>
+    </div>
+    
+<!-- BOTTOM NAV DYNAMIC PILL -->
+    <div class="nav-floating">
+        <div class="nav-item-float nav-btn" data-target="page-cart" style="position: relative;">
+            <svg width="22" height="22"><use href="#ic-cart"/></svg>
+            <span class="nav-text">Panier</span>
+            <div class="nav-badge-float" id="nav-badge" style="display:none;">0</div>
+        </div>
+        
+        <div class="nav-item-float nav-btn active" data-target="page-home">
+            <svg width="22" height="22"><use href="#ic-home"/></svg>
+            <span class="nav-text">Shop</span>
+        </div>
+        
+        <div class="nav-item-float nav-btn" data-target="page-profile">
+            <svg width="22" height="22"><use href="#ic-user"/></svg>
+            <span class="nav-text">VIP</span>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
-
 </html>
