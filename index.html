@@ -360,6 +360,53 @@
             border: 2px solid white;
         }
 
+        /* --- MULTI-VIDEOS SLIDER --- */
+        .prod-media-zone.multiple-media {
+            display: flex !important;
+            overflow-x: auto !important;
+            scroll-snap-type: x mandatory !important;
+            scrollbar-width: none;
+        }
+        .prod-media-zone.multiple-media::-webkit-scrollbar { 
+            display: none; 
+        }
+        .multi-video-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            scroll-snap-align: start;
+        }
+
+        /* --- INDICATEUR SWIPE MULTI-MEDIAS --- */
+        .swipe-hint {
+            position: absolute;
+            bottom: 7vh;
+            right: 2vh;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #000000;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 10;
+            pointer-events: none; /* Ne bloque pas le clic/swipe sous le texte */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            animation: swipePulse 1.2s infinite alternate ease-in-out;
+        }
+
+        /* Micro-animation de va-et-vient horizontal */
+        @keyframes swipePulse {
+            0% { transform: translateX(0); opacity: 0.8; }
+            100% { transform: translateX(6px); opacity: 1; }
+        }
+
         /* --- MODAL SUCCESS --- */
         .modal-overlay {
             position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4);
@@ -495,7 +542,13 @@
             <button class="header-back" onclick="navigate('home')">‹</button>
             <span id="cat-list-title">Catégorie</span>
         </div>
-        <div class="grid-2" id="cat-list-grid" style="padding-top: 20px;"></div>
+        
+        <div class="search-container" style="padding: 15px 20px 0 20px;">
+            <select id="cat-type-select" style="width: 100%; border: 1px solid var(--border); background: var(--card-bg); padding: 14px; border-radius: 12px; font-family: inherit; font-size: 0.95rem; font-weight: 600; outline: none; color: var(--text-main); box-shadow: var(--shadow-sm); -webkit-appearance: none;">
+                </select>
+        </div>
+
+        <div class="grid-2" id="cat-list-grid" style="padding-top: 15px;"></div>
     </div>
 
     <!-- PAGE: PRODUCT -->
@@ -504,7 +557,9 @@
         
         <div class="prod-media-zone" id="prod-media"></div>
 
-        <div class="prod-sheet">
+      <div class="prod-sheet">
+            <span id="p-type" style="background: var(--primary); color: white; font-size: 0.7rem; font-weight: 800; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; margin-bottom: 10px;">TYPE</span>
+            
             <div class="prod-title-row">
                 <h2 class="prod-title" id="p-name">Nom</h2>
             </div>
