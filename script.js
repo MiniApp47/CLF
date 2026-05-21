@@ -21,37 +21,288 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }, 1800);
 
-    // --- DATA (Tes produits intacts) ---
+// --- DATA (NOUVEAU MENU CLF44) ---
     const appData = [
+        // --- Catégorie 1: HASH ---
         {
-            id: 'HASH', name: 'Hash 🍫', type: 'Hash', image: 'CategHash.png',
+            id: 'HASH',
+            name: 'Hash 🍫',
+            type: 'Hash',
+            image: 'CategHash.png',
             farms: [
-                { id: 'FILTRE_90U', name: 'FILTRER 90u', products: [
-                    { id: '72u', flag: '🇲🇦', name: '𝐓𝐎𝐏 𝟕𝟑/𝟏𝟎𝟓𝐮🔥', farm: '𝐭𝐢𝐤𝐭𝐚𝐤 𝐟𝐚𝐫𝐦𝐬', type: 'Filtre90u', image: 'Product72.png', video: 'Video72.mov', description: '', tarifs: [{ weight: '10G', price: 70 }, { weight: '20G', price: 120 }, { weight: '50G', price: 250 }] }
-                ]},
-                { id: 'FROZEN_SIFT', name: 'FROZEN SIFT', products: [
-                    { id: 'PAPAYA', flag: '🇲🇦', name: 'PAPAYA 🥭', farm: 'escobar pikinho', type: 'FrozenSift', image: 'ProductPapaya.png', video: 'VideoPapaya.mov', tarifs: [{ weight: '5G', price: 70 }, { weight: '10G', price: 120 }, { weight: '20G', price: 230 }] },
-                    { id: 'GRAPE', flag: '🇲🇦', name: 'GRAPE GAZ 🍇', farm: 'LA SOURCE', type: 'FrozenSift', image: 'ProductSift.png', video: 'VideoSift.mov', jars: [{ name: 'GRAPE GAZ', emoji: '🍇'}, { name: 'LAVA CAKE', emoji: '🍰'}], tarifs: [{ weight: '5G', price: 70 }, { weight: '10G', price: 120 }, { weight: '20G', price: 230 }] }
-                ]},
-                { id: 'STATIC_SIFT', name: 'STATIC SIFT', products: [
-                    { id: 'OLIVE', flag: '🇲🇦', name: '𝐎𝐋𝐈𝐕𝐄 𝐒𝐓𝐀𝐓𝐈𝐂 🔞', farm: 'CLF-SELECTION', type: 'StaticSift', image: 'ProductOlive.png', video: 'VideoOlive.mov', jars: [{ name: '𝐅𝐫𝐨𝐛𝐢𝐝𝐝𝐞𝐧 𝐟𝐫𝐮𝐢𝐭𝐬', emoji: '🍇'}], tarifs: [{ weight: '5G', price: 80 }, { weight: '10G', price: 150 }] },
-                    { id: 'MELOW', flag: '🇲🇦', name: '𝐌𝐞𝐥𝐨𝐰 🍈', farm: 'CLF-SELECTION', type: 'StaticSift', image: 'ProductMelow.png', video: 'VideoMelow.mov', tarifs: [{ weight: '5G', price: 80 }, { weight: '10G', price: 150 }] }
-                ]}
+                {
+                    id: 'TOP_90U',
+                    name: 'NEWS TOP 90u',
+                    products: [
+                        {
+                            id: 'CHEESY_KUSH',
+                            flag: '🇲🇦',
+                            name: 'CHEESY KUSH ☄️',
+                            farm: 'First Class',
+                            type: 'Top90u',
+                            image: 'ProductChe.png',
+                            video: 'VideoChe.mov',
+                            tarifs: [
+                                { weight: '10G', price: 60 },
+                                { weight: '20G', price: 110 },
+                                { weight: '50G', price: 200 },
+                                { weight: '100G', price: 380 },
+                                { weight: '500G', price: 1750 },
+                                { weight: '1 kilos', price: 3300 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'FROZEN_SIFT',
+                    name: 'FROZEN SIFT',
+                    products: [
+                        {
+                            id: 'FROZEN_MIX',
+                            flag: '🇲🇦',
+                            name: '🇲🇦 𝐅𝐑𝐎𝐙𝐄𝐍 𝐒𝐈𝐅𝐓💥',
+                            farm: 'hashish of mountain 🏔️',
+                            type: 'FrozenSift',
+                            image: '',
+                            video: '',
+                            jars: [
+                                { name: 'O-G', emoji: '🌵' },
+                                { name: 'CALIPO', emoji: '🍨' }
+                            ],
+                            tarifs: [
+                                { weight: '5G', price: 60 },
+                                { weight: '10G', price: 110 },
+                                { weight: '20G', price: 200 },
+                                { weight: '50G', price: 450 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'DRY_SIFT_220U',
+                    name: 'DRY SIFT 220u ☄️',
+                    products: [
+                        {
+                            id: 'DRY_220_MIX',
+                            flag: '🇺🇸',
+                            name: '🇺🇸 𝐃𝐑𝐘 𝐒𝐈𝐅𝐓 𝟐𝟐𝟎𝐮 ☄️',
+                            farm: 'Hand sifted 🧤',
+                            type: 'DrySift',
+                            image: 'Product22.png',
+                            video: 'Video22.mov',
+                            jars: [
+                                { name: 'GSX', emoji: '🍪' },
+                                { name: 'RS-11', emoji: '🧈' }
+                            ],
+                            tarifs: [
+                                { weight: '5G', price: 60 },
+                                { weight: '10G', price: 100 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'DRY_SIFT_CALITE',
+                    name: 'DRY SIFT CALITÉ ☄️',
+                    products: [
+                        {
+                            id: 'OREOZ',
+                            flag: '🇺🇸',
+                            name: 'OREOZ 🍪',
+                            farm: 'CALITÉ FARMS 🇺🇸',
+                            type: 'DrySift',
+                            image: 'ProductOre.png',
+                            video: 'VideoOre.mov',
+                            tarifs: [
+                                { weight: '5G', price: 80 },
+                                { weight: '10G', price: 150 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'STATIC_SIFT',
+                    name: 'STATIC SIFT 💥',
+                    products: [
+                        {
+                            id: 'TRUFFLEZ',
+                            flag: '🇺🇸',
+                            name: 'TRUFFLEZ 💣',
+                            farm: 'Premium hand sifted 🧤',
+                            type: 'StaticSift',
+                            image: 'ProductTru.png',
+                            video: 'VideoTru.mov',
+                            tarifs: [
+                                { weight: '2G', price: 50 },
+                                { weight: '5G', price: 120 },
+                                { weight: '10G', price: 220 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'SINGLE_SOURCE',
+                    name: 'SINGLE SOURCE 💣',
+                    products: [
+                        {
+                            id: 'PINK_MOCHI',
+                            flag: '🇺🇸',
+                            name: 'PINK MOCHI 💣',
+                            farm: 'Premium hand sifted 🧤',
+                            type: 'SingleSource',
+                            image: 'PinkMochi.png',
+                            video: '',
+                            tarifs: [
+                                { weight: '2G', price: 60 },
+                                { weight: '5G', price: 140 },
+                                { weight: '10G', price: 260 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'WPFF',
+                    name: 'WPFF 🧨',
+                    products: [
+                        {
+                            id: 'ORANGE_BUD',
+                            flag: '🇺🇸',
+                            name: 'ORANGE BUD 🍊',
+                            farm: 'Sifted gold 🥁',
+                            type: 'WPFF',
+                            image: 'ProductWp.png',
+                            videos: ['VideoWp.mov','VideoWp2.mov'],
+                            tarifs: [
+                                { weight: '2G', price: 50 },
+                                { weight: '5G', price: 120 },
+                                { weight: '10G', price: 200 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'SINGLE_SOURCE_CALITE',
+                    name: 'SINGLE SOURCE CALITE 💣',
+                    products: [
+                        {
+                            id: 'HASH_BURGER',
+                            flag: '🇺🇸',
+                            name: 'HASH BURGER 🍔',
+                            farm: 'CALITE FARMS 🇺🇸',
+                            type: 'SingleSource',
+                            image: 'ProductB.png',
+                            video: 'VideoB.mov',
+                            tarifs: [
+                                { weight: '2G', price: 70 },
+                                { weight: '5G', price: 150 },
+                                { weight: '10G', price: 300 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'SINGLE_SOURCE_JAR',
+                    name: 'SINGLE SOURCE (Jars)',
+                    products: [
+                        {
+                            id: 'JAR_MIX',
+                            flag: '🇺🇸',
+                            name: '🇺🇸 𝐒𝐈𝐍𝐆𝐋𝐄 𝐒𝐎𝐔𝐑𝐂𝐄 )𝐣𝐚𝐫𝟐𝐆) 💣',
+                            farm: 'Sifted gold 🏆 🧤',
+                            type: 'SingleSource',
+                            image: 'ProductJ.png',
+                            video: 'VideoJ.mov',
+                            jars: [
+                                { name: 'PURPLE CREAM', emoji: '🟣' },
+                                { name: 'ROLLS CHOICE', emoji: '🔥' }
+                            ],
+                            tarifs: [
+                                { weight: '1 CAPSULE (2G)', price: 120 }
+                            ]
+                        }
+                    ]
+                }
             ]
         },
+        
+        // --- Catégorie 2: WEED ---
         {
-            id: 'FLEURS', name: 'Weed 🥦', type: 'Weed', image: 'CategWeed.png',
+            id: 'FLEURS',
+            name: 'Weed 🥦',
+            type: 'Weed',
+            image: 'CategWeed.png',
             farms: [
-                { id: 'WEED_HOLLANDA', name: 'WEED HOLLANDA', products: [
-                    { id: 'AMNESIA', flag: '🇳🇱', name: 'AMNESIA HAZE💥', farm: '𝐓𝐎𝐏 𝐇𝐀𝐙𝐄', type: 'WEEDHOLLANDA', image: 'ProductHaze.png', video: 'VideoHaze.mov', tarifs: [{ weight: '10G', price: 60 }, { weight: '20G', price: 110 }] }
-                ]},
-                { id: 'WEED_USA', name: 'WEED USA', products: [
-                    { id: 'MARKER', flag: '🇺🇸', name: 'PERMANENT MARKER💣', farm: '𝐂𝐀𝐋𝐈 𝐔.𝐒', type: 'CaliUs', image: 'ProductMarker.png', video: 'VideoMarker.mov', tarifs: [{ weight: '3,5G', price: 50 }, { weight: '10G', price: 100 }] }
-                ]}
+                {
+                    id: 'TOP_HAZE',
+                    name: 'TOP HAZE 🇳🇱',
+                    products: [
+                        {
+                            id: 'AMNESIA',
+                            flag: '🇳🇱',
+                            name: 'AMNESIA HAZE 💥',
+                            farm: 'TOP HAZE 🥦',
+                            type: 'Weed',
+                            image: 'ProductHaz.png',
+                            video: 'VideoHaz.mov',
+                            tarifs: [
+                                { weight: '10G', price: 60 },
+                                { weight: '20G', price: 110 },
+                                { weight: '50G', price: 230 },
+                                { weight: '100G', price: 400 },
+                                { weight: '200G', price: 780 },
+                                { weight: '500G', price: 1750 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'CALISPAIN',
+                    name: 'CALISPAIN TOP SHELF 🇪🇸',
+                    products: [
+                        {
+                            id: 'CALISPAIN_MIX',
+                            flag: '🇪🇸',
+                            name: 'MOTOR BREAD / MIMOSA',
+                            farm: 'Top Shelf',
+                            type: 'Weed',
+                            image: 'ProductMo.png',
+                            videos: ['VideoMo.mov','VideoMi.mov'],
+                            jars: [
+                                { name: 'MOTOR BREAD', emoji: '🥤' },
+                                { name: 'MIMOSA', emoji: '🥦' }
+                            ],
+                            tarifs: [
+                                { weight: '10G', price: 80 },
+                                { weight: '20G', price: 140 },
+                                { weight: '50G', price: 300 },
+                                { weight: '100G', price: 570 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'CALI_US',
+                    name: 'CALI U.S 🗽',
+                    products: [
+                        {
+                            id: 'DOG',
+                            flag: '🇺🇸',
+                            name: 'DOG 🚀',
+                            farm: 'CALI U.S 🗽',
+                            type: 'Weed',
+                            image: 'ProductDog.png',
+                            video: 'VideoDog.mov',
+                            tarifs: [
+                                { weight: '3,5G', price: 60 },
+                                { weight: '10G', price: 100 },
+                                { weight: '20G', price: 190 }
+                            ]
+                        }
+                    ]
+                }
             ]
         }
     ];
-
     // Extraction de tous les produits pour "Récents" et "Tendances"
     let allProducts = [];
     appData.forEach(c => c.farms.forEach(f => {
@@ -126,14 +377,47 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
     }
 
-    window.openCategory = function(catId) {
+   window.openCategory = function(catId) {
         const cat = appData.find(c => c.id === catId);
         document.getElementById('cat-list-title').innerText = cat.name;
-        let html = '';
+        
+        const selectEl = document.getElementById('cat-type-select');
+        
+        // 1. Génération dynamique des options du filtre selon les sous-catégories présentes
+        let selectHTML = `<option value="ALL">✨ Tout afficher (${cat.name})</option>`;
         cat.farms.forEach(f => {
-            f.products.forEach(p => { html += createCardHTML(p, false); });
+            selectHTML += `<option value="${f.id}">🔹 ${f.name}</option>`;
         });
-        document.getElementById('cat-list-grid').innerHTML = html;
+        selectEl.innerHTML = selectHTML;
+
+        // 2. Fonction d'isolation pour l'affichage filtré de la grille
+        function displayFilteredProducts(filterValue) {
+            let html = '';
+            cat.farms.forEach(f => {
+                if (filterValue === 'ALL' || f.id === filterValue) {
+                    f.products.forEach(p => {
+                        html += createCardHTML(p, false);
+                    });
+                }
+            });
+            
+            if(!html) {
+                html = `<p style="text-align:center; color:var(--text-muted); width:100%; grid-column:1/-1; padding-top:20px;">Aucun produit disponible.</p>`;
+            }
+            document.getElementById('cat-list-grid').innerHTML = html;
+        }
+
+        // 3. Affichage initial complet de la catégorie
+        displayFilteredProducts('ALL');
+
+        // 4. Écouteur d'événement sur changement d'option avec retour haptique Telegram
+        selectEl.onchange = function(e) {
+            displayFilteredProducts(e.target.value);
+            if (tg.HapticFeedback) {
+                tg.HapticFeedback.selectionChanged();
+            }
+        };
+
         navigate('cat-list');
     };
 
@@ -144,15 +428,39 @@ document.addEventListener('DOMContentLoaded', function () {
         currTarif = currentProd.tarifs[0];
         currVar = currentProd.jars ? currentProd.jars[0].name : null;
 
-        // Media
+      // Media (Gestion des vidéos uniques ou multiples avec indicateur de swipe)
         const mediaZone = document.getElementById('prod-media');
-        if(currentProd.video) {
+        mediaZone.className = 'prod-media-zone'; // Reset classe de base
+
+        if (currentProd.videos && currentProd.videos.length > 0) {
+            mediaZone.classList.add('multiple-media');
+            
+            // 1. Rendu des slides vidéos
+            let html = currentProd.videos.map(v => `
+                <div class="multi-video-slide">
+                    <video autoplay loop muted playsinline>
+                        <source src="${v}" type="video/mp4">
+                    </video>
+                </div>
+            `).join('');
+            
+            // 2. CONDITION 10X : Si plus d'une vidéo, on injecte le badge indicateur
+            if (currentProd.videos.length > 1) {
+                html += `<div class="swipe-hint">Swipe ➡️</div>`;
+            }
+            
+            mediaZone.innerHTML = html;
+        } else if (currentProd.video) {
+            // Mode vidéo unique
             mediaZone.innerHTML = `<video autoplay loop muted playsinline><source src="${currentProd.video}" type="video/mp4"></video>`;
         } else {
+            // Mode image par défaut
             mediaZone.innerHTML = `<img src="${currentProd.image}">`;
         }
 
         document.getElementById('p-name').innerText = currentProd.name;
+        // Injection dynamique du type de produit (ex: Top90u, FrozenSift...)
+        document.getElementById('p-type').innerText = currentProd.type ? currentProd.type : 'Premium';
         document.getElementById('p-desc').innerHTML = currentProd.description ? currentProd.description.replace(/\n/g, '<br>') : '';
 
         // Variantes
