@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
             farms: [
                 {
                     id: 'TOP_90U',
-                    name: 'NEWS TOP 90u',
+                    name: 'NEWS TOP 90u 🇲🇦',
                     products: [
                         {
                             id: 'CHEESY_KUSH',
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 {
                     id: 'FROZEN_SIFT',
-                    name: 'FROZEN SIFT',
+                    name: 'FROZEN SIFT 🇲🇦',
                     products: [
                         {
                             id: 'FROZEN_MIX',
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 {
                     id: 'DRY_SIFT_220U',
-                    name: 'DRY SIFT 220u ☄️',
+                    name: 'DRY SIFT 220u 🇺🇸☄️',
                     products: [
                         {
                             id: 'DRY_220_MIX',
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 {
                     id: 'DRY_SIFT_CALITE',
-                    name: 'DRY SIFT CALITÉ ☄️',
+                    name: 'DRY SIFT CALITÉ 🇺🇸☄️',
                     products: [
                         {
                             id: 'OREOZ',
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 {
                     id: 'STATIC_SIFT',
-                    name: 'STATIC SIFT 💥',
+                    name: 'STATIC SIFT 🇺🇸💥',
                     products: [
                         {
                             id: 'TRUFFLEZ',
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 {
                     id: 'SINGLE_SOURCE',
-                    name: 'SINGLE SOURCE 💣',
+                    name: 'SINGLE SOURCE 🇺🇸💣',
                     products: [
                         {
                             id: 'PINK_MOCHI',
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 {
                     id: 'WPFF',
-                    name: 'WPFF 🧨',
+                    name: 'WPFF 🇺🇸🧨',
                     products: [
                         {
                             id: 'ORANGE_BUD',
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 {
                     id: 'SINGLE_SOURCE_CALITE',
-                    name: 'SINGLE SOURCE CALITE 💣',
+                    name: 'SINGLE SOURCE CALITE 🇺🇸💣',
                     products: [
                         {
                             id: 'HASH_BURGER',
@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="${isLarge ? 'prod-card-lg' : 'prod-card-lg'}" style="${!isLarge ? 'flex:none; width:100%;' : ''}" onclick="openProduct('${p.id}')">
                 <img src="${p.image}" alt="">
                 <div class="info">
-                    <div class="badge">${badge} 🇺🇸</div>
+                    <div class="badge">${badge}</div>
                     <div class="title">${p.name}</div>
                     <div class="btn-outline">Voir les détails</div>
                 </div>
