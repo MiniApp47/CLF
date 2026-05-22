@@ -147,11 +147,25 @@ document.addEventListener('DOMContentLoaded', function () {
                         {
                             id: 'PINK_MOCHI',
                             flag: '🇺🇸',
-                            name: 'PINK MOCHI 💣',
+                            name: '🎮 VOG X RUNTZ 🎮',
                             farm: 'Premium hand sifted 🧤',
                             type: 'SingleSource',
-                            image: 'PinkMochi.png',
-                            video: '',
+                            image: 'ProductVog.png',
+                            video: 'VideoVog.mov',
+                            tarifs: [
+                                { weight: '2G', price: 60 },
+                                { weight: '5G', price: 140 },
+                                { weight: '10G', price: 260 }
+                            ]
+                        },
+                        {
+                            id: 'PINK_MOCHI',
+                            flag: '🇺🇸',
+                            name: '🐲 GSX PP 🐲',
+                            farm: 'Premium hand sifted 🧤',
+                            type: 'SingleSource',
+                            image: 'ProductGs.png',
+                            video: 'VideoGs.mov',
                             tarifs: [
                                 { weight: '2G', price: 60 },
                                 { weight: '5G', price: 140 },
