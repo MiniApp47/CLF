@@ -211,6 +211,20 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '5G', price: 150 },
                                 { weight: '10G', price: 300 }
                             ]
+                        },
+                        {
+                            id: '👅 CADILLAC RAINDOW',
+                            flag: '🇺🇸',
+                            name: '👅 CADILLAC RAINDOW',
+                            farm: 'CALITE FARMS 🇺🇸',
+                            type: 'StaticSift',
+                            image: 'ProductCad.png',
+                            videos:['VideoCad.mov','VideoCad2.mov'],
+                            tarifs: [
+                                { weight: '2G', price: 50 },
+                                { weight: '5G', price: 120 },
+                                { weight: '10G', price: 220 }
+                            ]
                         }
                     ]
                 },
