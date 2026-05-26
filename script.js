@@ -55,6 +55,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 {
                     id: 'FROZEN_SIFT',
+                    name: 'FROZEN SIFT 🇺🇸',
+                    products: [
+                        {
+                            id: 'FROZEN_SIFT_USA',
+                            flag: '🇺🇸',
+                            name: '🇺🇸 𝐅𝐑𝐎𝐙𝐄𝐍 𝐒𝐈𝐅𝐓 ☄️',
+                            farm: 'Hand sifted 🧤',
+                            type: 'FrozenSift',
+                            image: 'ProductPink.png',
+                            videos: ['VideoPink.mov','VideoPink2.mov'],
+                            jars: [
+                                { name: 'PINK GUAVA', emoji: '🍥' },
+                                { name: 'RS-11', emoji: '🧈' }
+                            ],
+                            tarifs: [
+                                { weight: '5G', price: 80 },
+                                { weight: '10G', price: 150 },
+                                { weight: '20G', price: 280 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'FROZEN_SIFT',
                     name: 'FROZEN SIFT 🇲🇦',
                     products: [
                         {
@@ -170,6 +194,26 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '2G', price: 60 },
                                 { weight: '5G', price: 140 },
                                 { weight: '10G', price: 260 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: '𝐖𝐀𝐓𝐄𝐑 𝐇𝐀𝐒𝐇𝟕𝟑𝐮',
+                    name: '🇺🇸 𝐖𝐀𝐓𝐄𝐑 𝐇𝐀𝐒𝐇𝟕𝟑𝐮 💣',
+                    products: [
+                        {
+                            id: 'CEREAL MILK 🥛 ',
+                            flag: '🇺🇸',
+                            name: 'CEREAL MILK 🥛 ',
+                            farm: 'sifted 𝐆𝐎𝐋𝐃 🧤',
+                            type: 'WPFF',
+                            image: 'ProductWh.png',
+                            video: 'VideoWh.mov',
+                            tarifs: [
+                                { weight: '2G', price: 70 },
+                                { weight: '5G', price: 150 },
+                                { weight: '10G', price: 280 }
                             ]
                         }
                     ]
