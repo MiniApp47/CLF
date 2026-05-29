@@ -31,6 +31,29 @@ document.addEventListener('DOMContentLoaded', function () {
             image: 'CategHash.png',
             farms: [
                 {
+                    id: '🧽 JAUNE MOUSSEUX 🧽',
+                    name: '🧽 JAUNE MOUSSEUX 🧽',
+                    products: [
+                        {
+                            id: '🇲🇦 TOP ULTRA MOUSS 🔥 ',
+                            flag: '🇲🇦',
+                            name: '🇲🇦 TOP ULTRA MOUSS 🔥 ',
+                            farm: '',
+                            type: 'Mousse',
+                            image: 'ProductMs.png',
+                            video: 'VideoMs.mov',
+                            tarifs: [
+                                { weight: '12G', price: 60 },
+                                { weight: '25G', price: 100 },
+                                { weight: '50G', price: 140 },
+                                { weight: '100G', price: 260 },
+                                { weight: '500G', price: 1150 },
+                                { weight: '1 kilo', price: 2200 }
+                            ]
+                        }
+                    ]
+                },
+                {
                     id: '𝐖𝐀𝐓𝐄𝐑 𝐇𝐀𝐒𝐇𝟕𝟑𝐮',
                     name: '🇺🇸 𝐖𝐀𝐓𝐄𝐑 𝐇𝐀𝐒𝐇𝟕𝟑𝐮 💣',
                     products: [
