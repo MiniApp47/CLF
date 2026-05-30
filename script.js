@@ -137,11 +137,12 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { name: 'CALIPO', emoji: '🍨' }
                             ],
                             tarifs: [
-                                { weight: '5G', price: 60 },
-                                { weight: '10G', price: 110 },
-                                { weight: '20G', price: 200 },
-                                { weight: '50G', price: 450 }
-                            ]
+
+                                { weight: '5G 🏷️ PROMO', price: 50 },
+                                { weight: '10G 🏷️ PROMO', price: 70 },
+                                { weight: '20G 🏷️ PROMO', price: 130 },
+                                { weight: '50G 🏷️ PROMO', price: 500 }
+                            ]                            
                         }
                     ]
                 },
