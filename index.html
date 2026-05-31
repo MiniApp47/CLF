@@ -199,8 +199,14 @@
         .prod-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
         .prod-title { font-size: 1.4rem; font-weight: 800; margin: 0; }
         
-        .tarif-selector { display: flex; gap: 10px; overflow-x: auto; margin-bottom: 20px; padding-bottom: 5px;}
-        .tarif-selector::-webkit-scrollbar { display: none; }
+        /* Permet aux boutons de passer à la ligne intelligemment au lieu d'être cachés */
+        .tarif-selector { 
+            display: flex; 
+            flex-wrap: wrap; /* LA MAGIE EST ICI */
+            gap: 10px; 
+            margin-bottom: 20px; 
+            padding-bottom: 5px;
+        }
         .tarif-pill {
             flex: 0 0 auto; border: 2px solid var(--border); border-radius: 14px;
             padding: 12px 20px; background: var(--card-bg); text-align: center; cursor: pointer; transition: 0.2s;
