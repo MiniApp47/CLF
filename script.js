@@ -73,18 +73,18 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-                /* {
+                {
                     id: 'TOP_90U',
                     name: 'NEWS TOP 90u 🇲🇦',
                     products: [
                         {
-                            id: 'CHEESY_KUSH',
+                            id: '👅 PURPLE STORM ♒️',
                             flag: '🇲🇦',
-                            name: 'CHEESY KUSH ☄️',
-                            farm: 'First Class',
+                            name: '👅 PURPLE STORM ♒️',
+                            farm: 'By KGF ⚖️',
                             type: 'Top90u',
-                            image: 'ProductChe.png',
-                            video: 'VideoChe.mov',
+                            image: 'ProductPS.png',
+                            video: 'VideoPS.mov',
                             tarifs: [
                                 { weight: '10G', price: 60 },
                                 { weight: '20G', price: 110 },
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                }, */
+                },
                 {
                     id: 'FROZEN_SIFT',
                     name: 'FROZEN SIFT 🇺🇸',
