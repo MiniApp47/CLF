@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-                {
+                /* {
                     id: 'TOP_90U',
                     name: 'NEWS TOP 90u 🇲🇦',
                     products: [
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                },
+                }, */
                 {
                     id: 'FROZEN_SIFT',
                     name: 'FROZEN SIFT 🇺🇸',
@@ -137,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { name: 'CALIPO', emoji: '🍨' }
                             ],
                             tarifs: [
-
                                 { weight: '5G 🏷️ PROMO', price: 50 },
                                 { weight: '10G 🏷️ PROMO', price: 70 },
                                 { weight: '20G 🏷️ PROMO', price: 130 },
@@ -351,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-                {
+                /* {
                     id: 'CALISPAIN',
                     name: 'CALISPAIN TOP SHELF 🇪🇸',
                     products: [
@@ -375,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                },
+                }, */
                 {
                     id: 'CALI_US',
                     name: 'CALI U.S 🗽',
