@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '5G 🏷️ PROMO', price: 50 },
                                 { weight: '10G 🏷️ PROMO', price: 70 },
                                 { weight: '20G 🏷️ PROMO', price: 130 },
-                                { weight: '50G 🏷️ PROMO', price: 500 }
+                                { weight: '100G 🏷️ PROMO', price: 500 }
                             ]                            
                         }
                     ]
@@ -350,22 +350,22 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-                /* {
+                {
                     id: 'CALISPAIN',
                     name: 'CALISPAIN TOP SHELF 🇪🇸',
                     products: [
                         {
-                            id: 'CALISPAIN_MIX',
+                            id: 'TROPICANA',
                             flag: '🇪🇸',
-                            name: 'MOTOR BREAD / MIMOSA',
+                            name: 'MTROPICANA',
                             farm: 'Top Shelf',
                             type: 'Weed',
-                            image: 'ProductMo.png',
-                            videos: ['VideoMo.mov','VideoMi.mov'],
-                            jars: [
+                            image: 'ProductTro.png',
+                            video: 'VideoTro.mov',
+                           /*  jars: [
                                 { name: 'MOTOR BREAD', emoji: '🥤' },
                                 { name: 'MIMOSA', emoji: '🥦' }
-                            ],
+                            ], */
                             tarifs: [
                                 { weight: '10G', price: 80 },
                                 { weight: '20G', price: 140 },
@@ -374,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                }, */
+                },
                 {
                     id: 'CALI_US',
                     name: 'CALI U.S 🗽',
