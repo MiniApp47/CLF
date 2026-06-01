@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         {
                             id: 'TROPICANA',
                             flag: '🇪🇸',
-                            name: 'MTROPICANA',
+                            name: 'TROPICANA',
                             farm: 'Top Shelf',
                             type: 'Weed',
                             image: 'ProductTro.png',
