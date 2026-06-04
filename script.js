@@ -380,9 +380,25 @@ document.addEventListener('DOMContentLoaded', function () {
                     name: 'CALI U.S 🗽',
                     products: [
                         {
+                            id: 'TROPICHERRY 🚀',
+                            flag: '🇺🇸',
+                            name: 'TROPICHERRY 🚀',
+                            farm: 'CALI U.S 🗽',
+                            type: 'Weed',
+                            image: 'ProductTropi.png',
+                            video: 'VideoTropi.mov',
+                            tarifs: [
+                                { weight: '3,5G', price: 60 },
+                                { weight: '10G', price: 100 },
+                                { weight: '20G', price: 190 },
+                                { weight: '50G', price: 370 },
+                                { weight: '100G', price: 700 },
+                            ]
+                        },
+                        {
                             id: 'DOG',
                             flag: '🇺🇸',
-                            name: 'DOG 🚀',
+                            name: 'DOG 🐕',
                             farm: 'CALI U.S 🗽',
                             type: 'Weed',
                             image: 'ProductDog.png',
