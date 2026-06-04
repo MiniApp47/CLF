@@ -395,7 +395,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '100G', price: 700 },
                             ]
                         },
-                        {
+                       /*  {
                             id: 'DOG',
                             flag: '🇺🇸',
                             name: 'DOG 🐕',
@@ -408,7 +408,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '10G', price: 100 },
                                 { weight: '20G', price: 190 }
                             ]
-                        }
+                        } */
                     ]
                 }
             ]
