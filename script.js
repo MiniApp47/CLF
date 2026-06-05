@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-                {
+                /* {
                     id: 'TOP_90U',
                     name: 'NEWS TOP 90u 🇲🇦',
                     products: [
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                },
+                }, */
                 {
                     id: 'FROZEN_SIFT',
                     name: 'FROZEN SIFT 🇺🇸',
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-                {
+                /* {
                     id: 'FROZEN_SIFT',
                     name: 'FROZEN SIFT 🇲🇦',
                     products: [
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]                            
                         }
                     ]
-                },
+                }, */
                 {
                     id: 'DRY_SIFT_220U',
                     name: 'DRY SIFT 220u 🇺🇸☄️',
