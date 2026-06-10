@@ -73,29 +73,29 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-                /* {
+                {
                     id: 'TOP_90U',
-                    name: 'NEWS TOP 90u 🇲🇦',
+                    name: '🇲🇦 𝐍𝐄𝐖𝐒 𝐓𝐎𝐏 𝟗𝟎𝐮🔥',
                     products: [
                         {
-                            id: '👅 PURPLE STORM ♒️',
+                            id: 'maracuja ⚡️',
                             flag: '🇲🇦',
-                            name: '👅 PURPLE STORM ♒️',
-                            farm: 'By KGF ⚖️',
+                            name: 'MARACUJA ⚡️',
+                            farm: 'By AFZ 🏴‍☠️',
                             type: 'Top90u',
-                            image: 'ProductPS.png',
-                            video: 'VideoPS.mov',
+                            image: 'ProductMa.png',
+                            video: 'VideoMa.mov',
                             tarifs: [
                                 { weight: '10G', price: 60 },
                                 { weight: '20G', price: 110 },
-                                { weight: '50G', price: 200 },
-                                { weight: '100G', price: 380 },
+                                { weight: '50G', price: 210 },
+                                { weight: '100G', price: 390 },
                                 { weight: '500G', price: 1750 },
                                 { weight: '1 kilos', price: 3300 }
                             ]
                         }
                     ]
-                }, */
+                },
                 {
                     id: 'FROZEN_SIFT',
                     name: 'FROZEN SIFT 🇺🇸',
@@ -189,8 +189,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 {
                     id: 'STATIC_SIFT',
-                    name: 'STATIC SIFT 🇺🇸💥',
+                    name: '🇺🇸 𝐒𝐓𝐀𝐓𝐈𝐂 𝐒𝐈𝐅𝐓💥',
                     products: [
+                        {
+                            id: 'PP x ICC 🍦',
+                            flag: '🇺🇸',
+                            name: 'PP x ICC 🍦',
+                            farm: 'Premium hand sifted 🧤',
+                            type: 'StaticSift',
+                            image: 'ProductPP.png',
+                            video: 'VideoPP.mov',
+                            tarifs: [
+                                { weight: '2G', price: 50 },
+                                { weight: '5G', price: 120 },
+                                { weight: '10G', price: 220 }
+                            ]
+                        },
                         {
                             id: 'TRUFFLEZ',
                             flag: '🇺🇸',
@@ -265,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     id: 'SINGLE_SOURCE_CALITE',
                     name: 'SINGLE SOURCE CALITE 🇺🇸💣',
                     products: [
-                        {
+                       /*  {
                             id: 'HASH_BURGER',
                             flag: '🇺🇸',
                             name: 'HASH BURGER 🍔',
@@ -278,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '5G', price: 150 },
                                 { weight: '10G', price: 300 }
                             ]
-                        },
+                        }, */
                         {
                             id: '👅 CADILLAC RAINDOW',
                             flag: '🇺🇸',
@@ -295,7 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-                {
+               /*  {
                     id: 'SINGLE_SOURCE_JAR',
                     name: 'SINGLE SOURCE (Jars)',
                     products: [
@@ -316,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                }
+                } */
             ]
         },
         
