@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-                {
+               /*  {
                     id: 'FROZEN_SIFT',
                     name: 'FROZEN SIFT 🇺🇸',
                     products: [
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                },
+                }, */
                 /* {
                     id: 'FROZEN_SIFT',
                     name: 'FROZEN SIFT 🇲🇦',
