@@ -391,8 +391,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 {
                     id: 'CALI_US',
-                    name: 'CALI U.S 🗽',
+                    name: '🇺🇸 𝐂𝐀𝐋𝐈 𝐔.𝐒 𝐓𝐎𝐏 𝐒𝐇𝐄𝐋𝐅 🗽',
                     products: [
+                        {
+                            id: 'DOG  🚀',
+                            flag: '🇺🇸',
+                            name: 'DOG  🐶',
+                            farm: 'CALI U.S 🗽',
+                            type: 'Weed',
+                            image: 'ProductDG.png',
+                            video: 'VideoDG.mov',
+                            tarifs: [
+                                { weight: '3,5G', price: 60 },
+                                { weight: '10G', price: 100 },
+                                { weight: '20G', price: 190 },
+                                { weight: '50G', price: 370 },
+                                { weight: '100G', price: 700 },
+                            ]
+                        },
                         {
                             id: 'TROPICHERRY 🚀',
                             flag: '🇺🇸',
