@@ -96,22 +96,18 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-               /*  {
+                {
                     id: 'FROZEN_SIFT',
-                    name: 'FROZEN SIFT 🇺🇸',
+                    name: '🇺🇸 𝐅𝐑𝐎𝐙𝐄𝐍 𝐒𝐈𝐅𝐓 ☄️',
                     products: [
                         {
-                            id: 'FROZEN_SIFT_USA',
+                            id: '-RS-11 🧈',
                             flag: '🇺🇸',
-                            name: '🇺🇸 𝐅𝐑𝐎𝐙𝐄𝐍 𝐒𝐈𝐅𝐓 ☄️',
+                            name: 'RS-11 🧈',
                             farm: 'Hand sifted 🧤',
                             type: 'FrozenSift',
-                            image: 'ProductPink.png',
-                            videos: ['VideoPink.mov','VideoPink2.mov'],
-                            jars: [
-                                { name: 'PINK GUAVA', emoji: '🍥' },
-                                { name: 'RS-11', emoji: '🧈' }
-                            ],
+                            image: 'Product11.png',
+                            video: 'Video11.mov',
                             tarifs: [
                                 { weight: '5G', price: 80 },
                                 { weight: '10G', price: 150 },
@@ -119,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                }, */
+                },
                 /* {
                     id: 'FROZEN_SIFT',
                     name: 'FROZEN SIFT 🇲🇦',
