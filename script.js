@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-                {
+                /* {
                     id: '𝐖𝐀𝐓𝐄𝐑 𝐇𝐀𝐒𝐇𝟕𝟑𝐮',
                     name: '🇺🇸 𝐖𝐀𝐓𝐄𝐑 𝐇𝐀𝐒𝐇𝟕𝟑𝐮 💣',
                     products: [
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                },
+                }, */
                 {
                     id: 'TOP_90U',
                     name: '🇲🇦 𝐍𝐄𝐖𝐒 𝐓𝐎𝐏 𝟗𝟎𝐮🔥',
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-                {
+               /*  {
                     id: 'FROZEN_SIFT',
                     name: '🇺🇸 𝐅𝐑𝐎𝐙𝐄𝐍 𝐒𝐈𝐅𝐓 ☄️',
                     products: [
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                },
+                }, */
                 /* {
                     id: 'FROZEN_SIFT',
                     name: 'FROZEN SIFT 🇲🇦',
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 }, */
-                {
+                /* {
                     id: 'DRY_SIFT_220U',
                     name: 'DRY SIFT 220u 🇺🇸☄️',
                     products: [
@@ -270,8 +270,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                },
-                {
+                }, */
+                /* {
                     id: 'SINGLE_SOURCE_CALITE',
                     name: 'SINGLE SOURCE CALITE 🇺🇸💣',
                     products: [
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '5G', price: 150 },
                                 { weight: '10G', price: 300 }
                             ]
-                        }, */
+                        }, 
                         {
                             id: '👅 CADILLAC RAINDOW',
                             flag: '🇺🇸',
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                },
+                }, */
                /*  {
                     id: 'SINGLE_SOURCE_JAR',
                     name: 'SINGLE SOURCE (Jars)',
@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'Weed',
             image: 'CategWeed.png',
             farms: [
-                {
+               /*  {
                     id: 'TOP_HAZE',
                     name: 'TOP HAZE 🇳🇱',
                     products: [
@@ -359,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             ]
                         }
                     ]
-                },
+                }, */
                 {
                     id: 'CALISPAIN',
                     name: 'CALISPAIN TOP SHELF 🇪🇸',
@@ -385,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     ]
                 },
-                {
+               /*  {
                     id: 'CALI_US',
                     name: '🇺🇸 𝐂𝐀𝐋𝐈 𝐔.𝐒 𝐓𝐎𝐏 𝐒𝐇𝐄𝐋𝐅 🗽',
                     products: [
@@ -434,9 +434,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '10G', price: 100 },
                                 { weight: '20G', price: 190 }
                             ]
-                        } */
+                        } 
                     ]
-                }
+                } */
             ]
         }
     ];
